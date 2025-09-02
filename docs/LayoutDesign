@@ -1,0 +1,37 @@
+Week 1 Rough Draft
+
+1.) Login/Signup Screen
+* Title: "Fantasy Loot Generator" in the top middle
+* Form (centered on screen):
+  * Input field: Username
+  * Input field: Password
+  * Login Button below the inputs
+  * Signup Button with: "Sign Up"
+
+Layout: Have everything vertically stacked and centered. (Feel free to change anything that might make it look better)
+
+2.) Main Dashboard
+Top Bar:
+  * Left: "Welcome, [username]"
+  * Right: Logout
+
+Main:
+  * Generate Loot Buttom
+  * Loot Card Preview:
+    * Item Name
+    * Picture for the item
+    * Type (Weapon/Armor/Potion)
+    * Rarity (Common, Uncommon, Rare, Legendary, Mythic)
+    * Short Description and stats
+    * Optional: Add a small token on the bottom corner to represent the rarity
+
+Inventory:
+  
+  * Grid of small recatangles representing items that the user generated
+  * Empty slots for items that the user has not gotten yet
+
+  * Layout: Button on top -> item card in the middle -> inventory grid at bottom
+  * We can either have the invetory on a seprate page or keep it on the same as the item generator
+
+Notes:
+  * I feel like we keep the layout as simple as possible for now and polish the artistic aspects as we go
