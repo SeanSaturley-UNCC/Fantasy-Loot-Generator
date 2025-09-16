@@ -22,6 +22,8 @@ A fullstack web app that generates fantasy loot (weapons, armor, potions, etc.) 
 # Getting Started
 
 1. Clone the repository
+https://github.com/SeanSaturley-UNCC/Fantasy-Loot-Generator/tree/main
+cd Fantasy-Loot-Generator
 
 ## 2. Install dependencies
 
