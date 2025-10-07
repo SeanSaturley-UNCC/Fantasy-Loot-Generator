@@ -1,0 +1,26 @@
+#  Server + Client dependencies 
+node_modules/
+client/node_modules/
+
+#  Client build output 
+client/build/
+
+# (If a build ever appears at the repo root, ignore that too)
+build/
+
+#  Possible server bundles 
+dist/
+
+#  Environment files 
+.env
+.env.*.local
+
+# Logs 
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+
+.DS_Store
+Thumbs.db
