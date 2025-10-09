@@ -1,9 +1,43 @@
 const express = require("express");
 const cors = require("cors");
+const mongoose = require("mongoose");
 
 const app = express();
 app.use(cors());
 const PORT = 5000;
+
+// MongoDB Connection
+const MONGODB_URI = "mongodb+srv://user:user123@lootgenerator.dbn11j4.mongodb.net/?retryWrites=true&w=majority&appName=LootGenerator"
+mongoose.connect(MONGODB_URI)
+  .then(() => console.log("Connected to MongoDB"))
+  .catch((err) => console.error("MongoDB connection error:", err));
+
+// Item Schema
+const itemSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  type: {
+    type: String,
+    required: true,
+  },
+  rarity: {
+    type: String,
+    required: true,
+  },
+  stats: [{
+    stat: String,
+    value: Number,
+  }],
+  effect: String, // Can be null
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+});
+
+const Item = mongoose.model("Item", itemSchema);
 
 // Weighted rarity system
 const rarityTable = [
@@ -64,10 +98,34 @@ function generateItem() {
   };
 }
 
-// API endpoint
+// API endpoint: Generate item
 app.get("/generate-item", (req, res) => {
   const item = generateItem();
   res.json(item);
+});
+
+// API endpoint: Save item to inventory
+app.post("/save-item", async (req, res) => {
+  try {
+    const itemData = req.body;
+    const item = new Item(itemData);
+    await item.save();
+    res.status(201).json({ message: "Item saved successfully", item });
+  } catch (error) {
+    console.error("Error saving item:", error);
+    res.status(500).json({ error: "Failed to save item" });
+  }
+});
+
+// API endpoint: Get inventory
+app.get("/inventory", async (req, res) => {
+  try {
+    const items = await Item.find().sort({ createdAt: -1 });
+    res.json(items);
+  } catch (error) {
+    console.error("Error fetching inventory:", error);
+    res.status(500).json({ error: "Failed to fetch inventory" });
+  }
 });
 
 app.listen(PORT, () => {
