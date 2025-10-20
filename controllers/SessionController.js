@@ -1,12 +1,12 @@
-import * as Session from '../models/Session'
-import { handleError } from '../handleError'
-import { v4 as uuid } from 'uuid'
-import { User } from '../models/User'
+const Session = require('../models/Session')
+const { handleError } = require('../utils')
+const { v4: uuid } = require('uuid')
+const User = require('../models/User')
 
 // TODO: add this if we want to
-// import config from '../config'
+// const config = require('../config')
 
-// export const checkAPI = (req) => {
+// const checkAPI = (req) => {
 //     const {
 //         API_HEADER,
 //         API_KEY
@@ -19,7 +19,7 @@ import { User } from '../models/User'
 //     return true
 // }
 
-export const authenticate = async (req, res, next) => {
+exports.authenticate = async (req, res, next) => {
     try {
         if (!checkAPI(req)) {
             return res.status(401).end()
@@ -45,14 +45,14 @@ export const authenticate = async (req, res, next) => {
     }
 }
 
-export const findSession = async (req) => {
+exports.findSession = async (req) => {
     const sessionId = req.signedCookies.User
     const foundSession = await Session.Session.findOne({
         token: sessionId,
         active: true
     })
     if (!foundSession) {
-        // await deleteAllSessions()
+        // await exports.deleteAllSessions()
     }
     return foundSession
 }
@@ -61,9 +61,9 @@ const getMaxAge = () => {
     return 24 * 60 * 60 * 1000
 }
 
-export const createSession = async (res, userId) => {
+exports.createSession = async (res, userId) => {
     try {
-        await deleteAllSessions(userId)
+        await exports.deleteAllSessions(userId)
         const newToken = uuid()
         const newSession = await Session.Session.create({
             userId: userId,
@@ -87,7 +87,7 @@ export const createSession = async (res, userId) => {
     }
 }
 
-export const validateSession = async (req, res) => {
+exports.validateSession = async (req, res) => {
     try {
         const { userId } = req.params
         const sessionIsValid = await Session.Session.exists({
@@ -100,7 +100,7 @@ export const validateSession = async (req, res) => {
     }
 }
 
-export const deleteAllSessions = async (userId) => {
+exports.deleteAllSessions = async (userId) => {
     try {
         await Session.Session.deleteMany({
             userId

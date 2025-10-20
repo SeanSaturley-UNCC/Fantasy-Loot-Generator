@@ -21,6 +21,7 @@ const notFound = require('./middleware/notFound');
 const errorHandler = require('./middleware/errorHandler');
 
 const lootRoutes = require('./routes/lootRoutes');
+const userRoutes = require('./routes/userRoutes');
 
 const app = express();
 
@@ -47,6 +48,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.use('/loot', lootRoutes);
+app.use('/users', userRoutes);
 
 
 app.use(express.static(path.join(__dirname, 'client', 'build')));
