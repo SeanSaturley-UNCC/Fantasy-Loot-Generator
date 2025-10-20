@@ -1,28 +1,24 @@
 import React, { useState } from "react";
 import "./App.css";
+import { generateLoot } from "./requests/lootRequests";
+
 
 function App() {
   const [item, setItem] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const generateItem = async () => {
-    setLoading(true);
-    setError(null);
-    try {
-      // ✅ point to your Express server & route we created
-      const res = await fetch("http://localhost:3001/loot/generate");
-      if (!res.ok) throw new Error(`Server responded ${res.status}`);
-      const data = await res.json();
-      setItem(data);
-    } catch (err) {
-      console.error("Error fetching item:", err);
-      setError("Failed to fetch item. Make sure the backend is running on port 3001.");
-      setItem(null);
-    } finally {
-      setLoading(false);
+    const handleGenerateItem = async () => {
+        setLoading(true)
+        setError(null)
+        try {
+            const data = await generateLoot()
+            setItem(data);
+        } catch (error) {
+            setError('Failed to generate item.' + error.message);
+        }
+        setLoading(false)
     }
-  };
 
   const rarityColors = {
     Common: "#9E9E9E",
@@ -36,7 +32,7 @@ function App() {
     <div className="App">
       <h1>Fantasy Loot Generator</h1>
 
-      <button className="generate-btn" onClick={generateItem} disabled={loading}>
+      <button className="generate-btn" onClick={handleGenerateItem} disabled={loading}>
         {loading ? "Generating…" : "Generate Item"}
       </button>
 
