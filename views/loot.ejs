@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title><%= title || 'Fantasy Loot Generator' %></title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Fantasy Loot Generator</h1>
+    <div class="toolbar">
+  <button id="genBtn" class="loot-chest-btn" aria-label="Generate item">
+  <span class="loot-chest" aria-hidden="true">
+    <span class="loot-chest__lid"></span>
+    <span class="loot-chest__box"></span>
+    <span class="loot-chest__band loot-chest__band--h"></span>
+    <span class="loot-chest__band loot-chest__band--v"></span>
+    <span class="loot-chest__lock"></span>
+    <span class="loot-chest__shine"></span>
+  </span>
+  <span class="loot-chest__label">Generate Item</span>
+</button>
+
+    </div>
+    <p id="err" class="error" hidden></p>
+    <div id="card" class="card">
+      <div class="imgwrap">
+        <img id="img" src="" alt="">
+      </div>
+      <div class="meta">
+        <div class="kv"><strong>Title:</strong> <span id="title"></span></div>
+        <div class="kv"><strong>Rarity:</strong> <span id="rarity"></span></div>
+        <div class="kv"><strong>Price:</strong> <span id="price"></span></div>
+        <div class="kv"><strong>Details:</strong> <span id="details"></span></div>
+      </div>
+    </div>
+  </div>
+  <noscript>Please enable JavaScript to use the generator.</noscript>
+  <script src="/js/loot.js" defer></script>
+</body>
+</html>

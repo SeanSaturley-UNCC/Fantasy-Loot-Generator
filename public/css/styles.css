@@ -1,0 +1,229 @@
+:root {
+  --bg: #f3f5f7;
+  --ink: #111;
+  --primary: #2374e1;
+  --radius: 10px;
+  --border: #222;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+.container { max-width: 820px; margin: 48px auto; padding: 0 16px; }
+h1 { text-align: center; margin: 0 0 24px; }
+
+.toolbar { display: flex; justify-content: center; margin-bottom: 20px; }
+
+.btn {
+  background: var(--primary);
+  color: #fff;
+  border: 0;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.btn[disabled] { opacity: 0.6; cursor: not-allowed; }
+
+.error { color: crimson; text-align: center; margin: 8px 0; }
+
+.card {
+  display: none;
+  gap: 18px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  background: #fff;
+  padding: 16px;
+}
+.card.show { display: flex; }
+
+/* item image */
+.imgwrap {
+  width: 50px;
+  min-width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.imgwrap img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+.kv { margin: 2px 0; }
+.rarity-common { color: #333; }
+.rarity-uncommon { color: #2b9348; }
+.rarity-rare { color: #3a86ff; }
+.rarity-epic { color: #9b5de5; }
+.rarity-legendary { color: #ff006e; }
+
+footer.site-footer { margin: 24px 0; text-align: center; color: #666; }
+
+.loot-chest-btn {
+  appearance: none;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.loot-chest-btn:focus-visible {
+  outline: 2px solid #2374e1;
+  outline-offset: 4px;
+  border-radius: 10px;
+}
+.loot-chest-btn[disabled] { opacity: 0.6; cursor: not-allowed; }
+
+.loot-chest__label { font-weight: 600; color: var(--ink); line-height: 1.2; }
+
+/* Chest drawing */
+.loot-chest,
+.loot-chest * {
+  box-sizing: border-box;         
+}
+
+.loot-chest {
+  position: relative;
+  width: 96px;                   
+  height: 76px;
+  perspective: 500px;
+  transform-style: preserve-3d;    
+  animation: loot-chest-bob 2s ease-in-out infinite;
+}
+
+.loot-chest__box {
+  position: absolute;
+  left: 0; right: 0;              
+  bottom: 0;
+  height: 56px;
+  background: linear-gradient(#9a5c1d, #814311);
+  border: 4px solid #2b1a0f;
+  border-top-width: 6px;
+  border-radius: 8px;
+  box-shadow: inset 0 10px 0 rgba(255,255,255,0.05);
+  transform: translateZ(0);        
+  z-index: 1;
+}
+
+.loot-chest__lid {
+  position: absolute;
+  left: 0; right: 0;               
+  top: 0;
+  height: 30px;
+  background: linear-gradient(#b36b22, #8d4e11);
+  border: 4px solid #2b1a0f;
+  border-bottom-width: 6px;
+  border-radius: 8px 8px 0 0;
+  transform-origin: 50% 100%;     
+  transform: rotateX(0deg) translateZ(0.01px);
+  transition: transform 220ms ease;
+  z-index: 4;
+}
+
+.loot-chest-btn:hover .loot-chest__lid,
+.loot-chest-btn:focus-visible .loot-chest__lid,
+.loot-chest-btn.loading .loot-chest__lid {
+  transform: rotateX(26deg) translateY(-1px) translateZ(0.01px);
+}
+
+/* Bands */
+.loot-chest__band {
+  position: absolute;
+  background: #e7c56b;
+  box-shadow: inset 0 0 0 2px #b08b2c;
+  z-index: 2;
+}
+.loot-chest__band--h {
+  left: 6px; right: 6px;           
+  height: 6px;
+  bottom: 20px;
+}
+.loot-chest__band--v {
+  top: 8px; bottom: 12px;
+  width: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Lock */
+.loot-chest__lock {
+  position: absolute;
+  width: 14px;
+  height: 18px;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+  background: #2b2b2b;
+  border-radius: 3px;
+  box-shadow: inset 0 -3px 0 rgba(0,0,0,0.25);
+  z-index: 3;
+}
+.loot-chest__lock::after {
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 6px;
+  left: 50%;
+  top: 5px;
+  transform: translateX(-50%);
+  background: #d9cc83;
+  border-radius: 1px;
+}
+
+/* Shine */
+.loot-chest__shine {
+  position: absolute;
+  left: 10px; right: 10px;
+  bottom: 18px;
+  height: 10px;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(ellipse at center, rgba(255,249,196,0.9), rgba(255,249,196,0) 60%);
+  filter: blur(1px);
+  transition: opacity 180ms ease;
+  z-index: 5;
+}
+.loot-chest-btn:hover .loot-chest__shine,
+.loot-chest-btn:focus-visible .loot-chest__shine,
+.loot-chest-btn.loading .loot-chest__shine {
+  opacity: 1;
+  animation: loot-sparkle 1.2s ease-in-out infinite;
+}
+
+
+@keyframes loot-chest-bob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-3px); }
+}
+
+
+@keyframes loot-sparkle {
+  0%, 100% { transform: scaleX(0.9); opacity: 0.9; }
+  50%      { transform: scaleX(1.05); opacity: 1; }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .loot-chest { animation: none; }
+  .loot-chest__shine { animation: none; }
+}
+
+
+
+.loot-chest__box   { z-index: 1; }
+.loot-chest__band  { z-index: 2; }
+.loot-chest__lock  { z-index: 3; }
+.loot-chest__lid   { z-index: 4; }
+.loot-chest__shine { z-index: 5; }

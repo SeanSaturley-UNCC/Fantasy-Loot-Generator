@@ -1,0 +1,802 @@
+[
+  {
+    "title": "Agility Potion",
+    "rarity": "uncommon",
+    "price": 18,
+    "details": "A crisp brew that lightens the feet.",
+    "image": "Agility Potion.png",
+    "active": true
+  },
+  {
+    "title": "Axe",
+    "rarity": "uncommon",
+    "price": 32,
+    "details": "Well-balanced and battle-ready.",
+    "image": "Axe.png",
+    "active": true
+  },
+  {
+    "title": "Backpack",
+    "rarity": "common",
+    "price": 12,
+    "details": "Sturdy canvas with extra straps.",
+    "image": "Backpack.png",
+    "active": true
+  },
+  {
+    "title": "Blindbox",
+    "rarity": "rare",
+    "price": 45,
+    "details": "A sealed prize with unknown contents.",
+    "image": "Blindbox.png",
+    "active": true
+  },
+  {
+    "title": "Bone Knife",
+    "rarity": "uncommon",
+    "price": 26,
+    "details": "Carved from a beast’s rib; surprisingly sharp.",
+    "image": "Bone Knife.png",
+    "active": true
+  },
+  {
+    "title": "Book",
+    "rarity": "common",
+    "price": 8,
+    "details": "Dog-eared pages full of field notes.",
+    "image": "Book.png",
+    "active": true
+  },
+  {
+    "title": "Bow",
+    "rarity": "uncommon",
+    "price": 34,
+    "details": "Laminated wood with a soft draw.",
+    "image": "Bow.png",
+    "active": true
+  },
+  {
+    "title": "Bronze",
+    "rarity": "common",
+    "price": 9,
+    "details": "A workable ingot for basic crafting.",
+    "image": "Bronze.png",
+    "active": true
+  },
+  {
+    "title": "Bucket",
+    "rarity": "common",
+    "price": 5,
+    "details": "Holds water, sand, or secrets.",
+    "image": "Bucket.png",
+    "active": true
+  },
+  {
+    "title": "Canteen",
+    "rarity": "common",
+    "price": 7,
+    "details": "Keeps drinks cool on long marches.",
+    "image": "Canteen.png",
+    "active": true
+  },
+  {
+    "title": "Celestial Staff",
+    "rarity": "epic",
+    "price": 220,
+    "details": "Star-etched wood hums under moonlight.",
+    "image": "Celestial Staff.png",
+    "active": true
+  },
+  {
+    "title": "Chainmail Vest",
+    "rarity": "uncommon",
+    "price": 48,
+    "details": "Interlinked rings that won’t snag.",
+    "image": "Chainmail Vest.png",
+    "active": true
+  },
+  {
+    "title": "Chameleon Paintbrush",
+    "rarity": "rare",
+    "price": 60,
+    "details": "Strokes take on the hue of their surroundings.",
+    "image": "Chameleon Paintbrush.png",
+    "active": true
+  },
+  {
+    "title": "Charred Sausage",
+    "rarity": "common",
+    "price": 3,
+    "details": "Burnt edges, smoky center—still edible.",
+    "image": "Charred Sausage.png",
+    "active": true
+  },
+  {
+    "title": "Cinnamon Bun",
+    "rarity": "common",
+    "price": 4,
+    "details": "Warm, sticky, and morale-boosting.",
+    "image": "Cinnamon Bun.png",
+    "active": true
+  },
+  {
+    "title": "Cloak",
+    "rarity": "common",
+    "price": 14,
+    "details": "Weathered wool with a deep hood.",
+    "image": "Cloak.png",
+    "active": true
+  },
+  {
+    "title": "Club",
+    "rarity": "common",
+    "price": 10,
+    "details": "A simple persuader of seasoned oak.",
+    "image": "Club.png",
+    "active": true
+  },
+  {
+    "title": "Coin",
+    "rarity": "common",
+    "price": 1,
+    "details": "Minted in a distant city-state.",
+    "image": "Coin.png",
+    "active": true
+  },
+  {
+    "title": "Compass",
+    "rarity": "uncommon",
+    "price": 20,
+    "details": "The needle settles fast, even in storms.",
+    "image": "Compass.png",
+    "active": true
+  },
+  {
+    "title": "Copper Bracelet",
+    "rarity": "common",
+    "price": 9,
+    "details": "Polished band with faint carvings.",
+    "image": "Copper Bracelet.png",
+    "active": true
+  },
+  {
+    "title": "Crossbow",
+    "rarity": "rare",
+    "price": 85,
+    "details": "Short stock, fast reload mechanism.",
+    "image": "Crossbow.png",
+    "active": true
+  },
+  {
+    "title": "Crowbar",
+    "rarity": "common",
+    "price": 11,
+    "details": "Steel leverage for stubborn doors.",
+    "image": "Crowbar.png",
+    "active": true
+  },
+  {
+    "title": "Crystal Sword",
+    "rarity": "epic",
+    "price": 240,
+    "details": "Translucent blade rings when drawn.",
+    "image": "Crystal Sword.png",
+    "active": true
+  },
+  {
+    "title": "Dagger",
+    "rarity": "uncommon",
+    "price": 22,
+    "details": "Good balance; hides well in a boot.",
+    "image": "Dagger.png",
+    "active": true
+  },
+  {
+    "title": "Dragon Blood Potion",
+    "rarity": "rare",
+    "price": 90,
+    "details": "Hot to the touch; invigorates the veins.",
+    "image": "Dragon Blood Potion.png",
+    "active": true
+  },
+  {
+    "title": "Dragon Fang Necklace",
+    "rarity": "rare",
+    "price": 95,
+    "details": "A fang trophy strung on braided leather.",
+    "image": "Dragon Fang Necklace.png",
+    "active": true
+  },
+  {
+    "title": "Eternal Feast",
+    "rarity": "legendary",
+    "price": 480,
+    "details": "A platter that refills with every sunrise.",
+    "image": "Eternal Feast.png",
+    "active": true
+  },
+  {
+    "title": "Feather Token",
+    "rarity": "uncommon",
+    "price": 18,
+    "details": "A charm that lightens one’s step.",
+    "image": "Feather Token.png",
+    "active": true
+  },
+  {
+    "title": "Fire Resistance Potion",
+    "rarity": "uncommon",
+    "price": 24,
+    "details": "Leaves a cool film on the tongue.",
+    "image": "Fire Resistance Potion.png",
+    "active": true
+  },
+  {
+    "title": "Fire Sword",
+    "rarity": "epic",
+    "price": 260,
+    "details": "Embers trail from each swing.",
+    "image": "Fire Sword.png",
+    "active": true
+  },
+  {
+    "title": "Fishing Net",
+    "rarity": "common",
+    "price": 13,
+    "details": "Knotted cord treated with resin.",
+    "image": "Fishing Net.png",
+    "active": true
+  },
+  {
+    "title": "Fishing Rod",
+    "rarity": "common",
+    "price": 16,
+    "details": "Flexible cane with a smooth reel.",
+    "image": "Fishing Rod.png",
+    "active": true
+  },
+  {
+    "title": "Flamethrower",
+    "rarity": "epic",
+    "price": 275,
+    "details": "Compressed alchemic fuel—handle with care.",
+    "image": "Flamethrower.png",
+    "active": true
+  },
+  {
+    "title": "Flashlight",
+    "rarity": "uncommon",
+    "price": 20,
+    "details": "Brass tube with a bright white beam.",
+    "image": "Flashlight.png",
+    "active": true
+  },
+  {
+    "title": "Fresh Berries",
+    "rarity": "common",
+    "price": 3,
+    "details": "Sweet and tart in equal measure.",
+    "image": "Fresh Berries.png",
+    "active": true
+  },
+  {
+    "title": "Frost Skin Potion",
+    "rarity": "uncommon",
+    "price": 22,
+    "details": "Chills the skin and numbs the burn.",
+    "image": "Frost Skin Potion.png",
+    "active": true
+  },
+  {
+    "title": "Gem",
+    "rarity": "rare",
+    "price": 110,
+    "details": "A clear stone with a deep inner fire.",
+    "image": "Gem.png",
+    "active": true
+  },
+  {
+    "title": "Gold",
+    "rarity": "rare",
+    "price": 150,
+    "details": "Heavy ingot worth its weight.",
+    "image": "Gold.png",
+    "active": true
+  },
+  {
+    "title": "Gravity Boot",
+    "rarity": "rare",
+    "price": 120,
+    "details": "The soles anchor to any surface.",
+    "image": "Gravity Boot.png",
+    "active": true
+  },
+  {
+    "title": "Grilled Fish Fillet",
+    "rarity": "common",
+    "price": 6,
+    "details": "Flaky meat with a lemon glaze.",
+    "image": "Grilled Fish Fillet.png",
+    "active": true
+  },
+  {
+    "title": "Hairpin",
+    "rarity": "common",
+    "price": 5,
+    "details": "A simple pin with floral etching.",
+    "image": "Hairpin.png",
+    "active": true
+  },
+  {
+    "title": "Ham Sandwich",
+    "rarity": "common",
+    "price": 5,
+    "details": "Hearty loaf and smoky slices.",
+    "image": "Ham Sandwich.png",
+    "active": true
+  },
+  {
+    "title": "Hammer",
+    "rarity": "common",
+    "price": 12,
+    "details": "Steel head on a hickory handle.",
+    "image": "Hammer.png",
+    "active": true
+  },
+  {
+    "title": "Healing Potion",
+    "rarity": "uncommon",
+    "price": 25,
+    "details": "Warmth spreads as wounds knit.",
+    "image": "Healing Potion.png",
+    "active": true
+  },
+  {
+    "title": "Ice Sword",
+    "rarity": "epic",
+    "price": 230,
+    "details": "Frost rimes the blade in the scabbard.",
+    "image": "Ice Sword.png",
+    "active": true
+  },
+  {
+    "title": "Immortality Potion",
+    "rarity": "legendary",
+    "price": 500,
+    "details": "A forbidden draught rumored to halt time.",
+    "image": "Immortality Potion.png",
+    "active": true
+  },
+  {
+    "title": "Invisibility Potion",
+    "rarity": "rare",
+    "price": 95,
+    "details": "Turns cloudy when shaken, then vanishes.",
+    "image": "Invisibility Potion.png",
+    "active": true
+  },
+  {
+    "title": "Invisible Cloak",
+    "rarity": "epic",
+    "price": 210,
+    "details": "Fabric that blurs the wearer’s outline.",
+    "image": "Invisible Cloak.png",
+    "active": true
+  },
+  {
+    "title": "Iron Knuckles",
+    "rarity": "uncommon",
+    "price": 28,
+    "details": "Adds weight to a mean right hook.",
+    "image": "Iron Knuckles.png",
+    "active": true
+  },
+  {
+    "title": "Iron Pipe",
+    "rarity": "common",
+    "price": 9,
+    "details": "Plain length of iron with many uses.",
+    "image": "Iron Pipe.png",
+    "active": true
+  },
+  {
+    "title": "Iron Whip",
+    "rarity": "rare",
+    "price": 88,
+    "details": "Segmented links crack like thunder.",
+    "image": "Iron Whip.png",
+    "active": true
+  },
+  {
+    "title": "Katana",
+    "rarity": "epic",
+    "price": 260,
+    "details": "Folded steel edge that sings.",
+    "image": "Katana.png",
+    "active": true
+  },
+  {
+    "title": "Keychain",
+    "rarity": "common",
+    "price": 4,
+    "details": "Keeps your keys in one place.",
+    "image": "Keychain.png",
+    "active": true
+  },
+  {
+    "title": "Labubu",
+    "rarity": "rare",
+    "price": 130,
+    "details": "A curious mascot said to bring luck.",
+    "image": "Labubu.png",
+    "active": true
+  },
+  {
+    "title": "Lantern",
+    "rarity": "common",
+    "price": 14,
+    "details": "Steady flame behind glass panes.",
+    "image": "Lantern.png",
+    "active": true
+  },
+  {
+    "title": "Laser Gun",
+    "rarity": "epic",
+    "price": 300,
+    "details": "Coherent light in a compact frame.",
+    "image": "Laser Gun.png",
+    "active": true
+  },
+  {
+    "title": "Leather Boot",
+    "rarity": "common",
+    "price": 16,
+    "details": "Well-oiled leather for rough trails.",
+    "image": "Leather Boot.png",
+    "active": true
+  },
+  {
+    "title": "Leather Wristband",
+    "rarity": "common",
+    "price": 7,
+    "details": "A simple strap with a brass buckle.",
+    "image": "Leather Wristband.png",
+    "active": true
+  },
+  {
+    "title": "Leftovers",
+    "rarity": "common",
+    "price": 2,
+    "details": "Cold but filling if you’re hungry.",
+    "image": "Leftovers.png",
+    "active": true
+  },
+  {
+    "title": "Leviathan Trident",
+    "rarity": "legendary",
+    "price": 480,
+    "details": "Sea-forged prongs churn the tide.",
+    "image": "Leviathan Trident.png",
+    "active": true
+  },
+  {
+    "title": "Locket",
+    "rarity": "uncommon",
+    "price": 22,
+    "details": "Hinged charm with room for a secret.",
+    "image": "Locket.png",
+    "active": true
+  },
+  {
+    "title": "Lucky Coin",
+    "rarity": "uncommon",
+    "price": 18,
+    "details": "Never seems to land on its edge.",
+    "image": "Lucky Coin.png",
+    "active": true
+  },
+  {
+    "title": "Mage Robe",
+    "rarity": "rare",
+    "price": 120,
+    "details": "Threaded with subtle wards.",
+    "image": "Mage Robe.png",
+    "active": true
+  },
+  {
+    "title": "Magnifying Glass",
+    "rarity": "common",
+    "price": 10,
+    "details": "Brings tiny runes into focus.",
+    "image": "Magnifying Glass.png",
+    "active": true
+  },
+  {
+    "title": "Mana Potion",
+    "rarity": "uncommon",
+    "price": 23,
+    "details": "Blue swirl that steadies the mind.",
+    "image": "Mana Potion.png",
+    "active": true
+  },
+  {
+    "title": "Meat Pie",
+    "rarity": "common",
+    "price": 6,
+    "details": "Flaky crust and peppered gravy.",
+    "image": "Meat Pie.png",
+    "active": true
+  },
+  {
+    "title": "Moldy Cheese",
+    "rarity": "common",
+    "price": 2,
+    "details": "Smells worse than it tastes.",
+    "image": "Moldy Cheese.png",
+    "active": true
+  },
+  {
+    "title": "Money",
+    "rarity": "common",
+    "price": 1,
+    "details": "A tidy stack of local currency.",
+    "image": "Money.png",
+    "active": true
+  },
+  {
+    "title": "Mystic Bracelet",
+    "rarity": "rare",
+    "price": 140,
+    "details": "Stones that pulse with faint rhythm.",
+    "image": "Mystic Bracelet.png",
+    "active": true
+  },
+  {
+    "title": "Night Vision Potion",
+    "rarity": "uncommon",
+    "price": 27,
+    "details": "Gives eyes a soft emerald sheen.",
+    "image": "Night Vision Potion.png",
+    "active": true
+  },
+  {
+    "title": "Pickaxe",
+    "rarity": "common",
+    "price": 18,
+    "details": "Hardened head for stubborn ore.",
+    "image": "Pickaxe.png",
+    "active": true
+  },
+  {
+    "title": "Plain Scarf",
+    "rarity": "common",
+    "price": 6,
+    "details": "Cozy knit in a neutral dye.",
+    "image": "Plain Scarf.png",
+    "active": true
+  },
+  {
+    "title": "Poison Potion",
+    "rarity": "uncommon",
+    "price": 28,
+    "details": "Handle with care; bitter and dark.",
+    "image": "Poison Potion.png",
+    "active": true
+  },
+  {
+    "title": "Poison Sword",
+    "rarity": "rare",
+    "price": 160,
+    "details": "Channels venom along etched grooves.",
+    "image": "Poison Sword.png",
+    "active": true
+  },
+  {
+    "title": "Protective Goggle",
+    "rarity": "common",
+    "price": 9,
+    "details": "Shatter-resistant lenses for tinkerers.",
+    "image": "Protective Goggle.png",
+    "active": true
+  },
+  {
+    "title": "Roast Chicken Leg",
+    "rarity": "common",
+    "price": 4,
+    "details": "Juicy and generously seasoned.",
+    "image": "Roast Chicken Leg.png",
+    "active": true
+  },
+  {
+    "title": "Rope",
+    "rarity": "common",
+    "price": 8,
+    "details": "Coiled hemp with good grip.",
+    "image": "Rope.png",
+    "active": true
+  },
+  {
+    "title": "Rotten",
+    "rarity": "common",
+    "price": 1,
+    "details": "Past its prime, to say the least.",
+    "image": "Rotten.png",
+    "active": true
+  },
+  {
+    "title": "Rusty Mace",
+    "rarity": "uncommon",
+    "price": 24,
+    "details": "Surface pitted, core still strong.",
+    "image": "Rusty Mace.png",
+    "active": true
+  },
+  {
+    "title": "Screwdriver",
+    "rarity": "common",
+    "price": 6,
+    "details": "Flat head with a comfy grip.",
+    "image": "Screwdriver.png",
+    "active": true
+  },
+  {
+    "title": "Serpent Spear",
+    "rarity": "rare",
+    "price": 150,
+    "details": "Barbed tip styled after a coiling snake.",
+    "image": "Serpent Spear.png",
+    "active": true
+  },
+  {
+    "title": "Shield",
+    "rarity": "uncommon",
+    "price": 42,
+    "details": "Round guard that holds firm.",
+    "image": "Shield.png",
+    "active": true
+  },
+  {
+    "title": "Shovel",
+    "rarity": "common",
+    "price": 12,
+    "details": "Dig pits or uncover treasure.",
+    "image": "Shovel.png",
+    "active": true
+  },
+  {
+    "title": "Silver Ring",
+    "rarity": "uncommon",
+    "price": 30,
+    "details": "Gleams even in low light.",
+    "image": "Silver Ring.png",
+    "active": true
+  },
+  {
+    "title": "Sling Shot",
+    "rarity": "common",
+    "price": 7,
+    "details": "Leather pouch with a springy band.",
+    "image": "Sling Shot.png",
+    "active": true
+  },
+  {
+    "title": "Sliver",
+    "rarity": "common",
+    "price": 3,
+    "details": "A thin shaving of metal.",
+    "image": "Sliver.png",
+    "active": true
+  },
+  {
+    "title": "Sock",
+    "rarity": "common",
+    "price": 2,
+    "details": "Warm enough for camp nights.",
+    "image": "Sock.png",
+    "active": true
+  },
+  {
+    "title": "Spear",
+    "rarity": "uncommon",
+    "price": 36,
+    "details": "Straight shaft and keen point.",
+    "image": "Spear.png",
+    "active": true
+  },
+  {
+    "title": "Spiced Stew",
+    "rarity": "common",
+    "price": 5,
+    "details": "A rich broth that kicks.",
+    "image": "Spiced Stew.png",
+    "active": true
+  },
+  {
+    "title": "Stale Bread",
+    "rarity": "common",
+    "price": 1,
+    "details": "Hard crust, still fills the belly.",
+    "image": "Stale Bread.png",
+    "active": true
+  },
+  {
+    "title": "Stamina Potion",
+    "rarity": "uncommon",
+    "price": 20,
+    "details": "Carries you through the last mile.",
+    "image": "Stamina Potion.png",
+    "active": true
+  },
+  {
+    "title": "Steak",
+    "rarity": "common",
+    "price": 9,
+    "details": "Seared well with a hint of pepper.",
+    "image": "Steak.png",
+    "active": true
+  },
+  {
+    "title": "Stone Knife",
+    "rarity": "common",
+    "price": 13,
+    "details": "Chipped flint edge on sinew binding.",
+    "image": "Stone Knife.png",
+    "active": true
+  },
+  {
+    "title": "Sweet Pudding",
+    "rarity": "common",
+    "price": 4,
+    "details": "Comfort dessert with a caramel top.",
+    "image": "Sweet Pudding.png",
+    "active": true
+  },
+  {
+    "title": "Tin Helmet",
+    "rarity": "common",
+    "price": 15,
+    "details": "Dented but dependable.",
+    "image": "Tin Helmet.png",
+    "active": true
+  },
+  {
+    "title": "Torn Gloves",
+    "rarity": "common",
+    "price": 3,
+    "details": "Better than bare hands, barely.",
+    "image": "Torn Gloves.png",
+    "active": true
+  },
+  {
+    "title": "Utility Belt",
+    "rarity": "uncommon",
+    "price": 25,
+    "details": "Many loops for many tools.",
+    "image": "Utility Belt.png",
+    "active": true
+  },
+  {
+    "title": "Water Breathing Potion",
+    "rarity": "rare",
+    "price": 105,
+    "details": "Lets lungs sip the sea.",
+    "image": "Water Breathing Potion.png",
+    "active": true
+  },
+  {
+    "title": "Wilted Salad",
+    "rarity": "common",
+    "price": 2,
+    "details": "Leaves a little soggy but edible.",
+    "image": "Wilted Salad.png",
+    "active": true
+  },
+  {
+    "title": "Wooden Buckler",
+    "rarity": "uncommon",
+    "price": 28,
+    "details": "Light shield that’s quick to raise.",
+    "image": "Wooden Buckler.png",
+    "active": true
+  }
+]
