@@ -19,12 +19,24 @@ exports.hashPassword = async (oldValue) => {
 
     return newValue
 }
+const checkAPI = (req) => {
+    const {
+        API_HEADER,
+        API_KEY
+    } = process.env
+
+    const key = req.get(API_HEADER)
+    if (!key || key !== API_KEY) {
+        return false
+    }
+    return true
+}
 
 exports.authenticate = async (req, res, next) => {
     try {
-        // if (!checkAPI(req)) {
-        //     return res.status(401).end()
-        // }
+        if (!checkAPI(req)) {
+            return res.status(401).end()
+        }
 
         const userCookie = req.signedCookies.User
         const sessionExists = await Session.Session.findOne({

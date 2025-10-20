@@ -3,47 +3,6 @@ const { handleError } = require('../utils')
 const { v4: uuid } = require('uuid')
 const User = require('../models/User')
 
-// TODO: add this if we want to
-// const config = require('../config')
-
-// const checkAPI = (req) => {
-//     const {
-//         API_HEADER,
-//         API_KEY
-//     } = config()
-
-//     const key = req.get(API_HEADER)
-//     if (!key || key !== API_KEY) {
-//         return false
-//     }
-//     return true
-// }
-
-exports.authenticate = async (req, res, next) => {
-    try {
-        if (!checkAPI(req)) {
-            return res.status(401).end()
-        }
-
-        const userCookie = req.signedCookies.User
-        const sessionExists = await Session.Session.findOne({
-            token: userCookie,
-            active: true
-        })
-        if (sessionExists) {
-            const currentUser = await User.findOne({
-                _id: sessionExists.userId
-            }).lean()
-            if (currentUser) {
-                res.locals.user = currentUser
-            }
-            return next()
-        }
-        res.status(403).json({ message: 'This action is not allowed' })
-    } catch {
-        res.status(403).json({ message: 'Failed to Authenticate.' })
-    }
-}
 
 exports.findSession = async (req) => {
     const sessionId = req.signedCookies.User
