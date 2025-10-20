@@ -25,7 +25,6 @@ const userRoutes = require('./routes/userRoutes');
 
 const app = express();
 
-
 app.use(cors({
   origin: 'http://localhost:3000',   
   methods: ['GET','POST','PUT','DELETE','PATCH','OPTIONS'],
@@ -37,7 +36,7 @@ app.use(helmet());
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
+app.use(cookieParser("some_secret_cookie"));
 
 
 app.set('views', path.join(__dirname, 'views'));

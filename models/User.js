@@ -26,6 +26,7 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: true,
+      select: false // * when calling User.find(...) it will automatically hide the password (for security)
     }
   },
   {
@@ -34,20 +35,9 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-// hashes the users' password before saving
-userSchema.pre('save', async function (next) {
-    if (!this.isModified('password')) return next();
-    try {
-        this.password = await hashPassword(this.password);
-        next();
-    } catch (err) {
-        next(err);
-    }
-});
-
 // instance method to compare passwords
 userSchema.methods.comparePassword = async function (candidatePassword) {
-  return await bcrypt.compare(candidatePassword, this.password)
+    return await bcrypt.compare(candidatePassword.toString(), this.password.toString())
 }
 
 const User = mongoose.model('User', userSchema);

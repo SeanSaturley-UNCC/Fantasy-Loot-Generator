@@ -51,9 +51,6 @@ exports.findSession = async (req) => {
         token: sessionId,
         active: true
     })
-    if (!foundSession) {
-        // await exports.deleteAllSessions()
-    }
     return foundSession
 }
 
