@@ -9,8 +9,6 @@ mongoose.connect(process.env.MONGO_URI, {
 .then(() => console.log("✅ MongoDB Connected"))
 .catch(err => console.log("❌ MongoDB connection error:", err));
 
-
-const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 const helmet = require('helmet');
@@ -38,21 +36,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser("some_secret_cookie"));
 
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-
-app.use(express.static(path.join(__dirname, 'public')));
-
 //! --------------------------- Routes ---------------------------
 app.use('/loot', lootRoutes);
 app.use('/users', userRoutes);
-
-app.use(express.static(path.join(__dirname, 'client', 'build')));
-
-app.get(/^\/(?!loot).*/, (_req, res) => {
-  res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
-});
-
+``
 app.use(notFound);
 app.use(errorHandler);
 

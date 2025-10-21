@@ -28,7 +28,7 @@ router.route('/login').post(
 )
 
 router.route('/logout/:userId').put(
-    authenticate,
+    // authenticate,
     //! logout user
     UserController.logoutUser
 )
