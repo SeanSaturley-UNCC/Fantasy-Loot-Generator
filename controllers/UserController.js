@@ -114,39 +114,6 @@ exports.createUser = async (req, res) => {
     }
 }
 
-exports.setupUser = async (req, res) => {
-    try {
-        const { body } = req
-        const { id } = req.params
-
-        const user = await User.findOne({ _id: id })
-        if (!user) {
-            throw new Error('User not found')
-        }
-        if (user.activeAt) {
-            throw new Error('User already activated')
-        }
-
-        const hashedPassword = await hashPassword(body.password)
-
-        await User.updateOne(
-            { _id: id },
-            {
-                $set: {
-                    ...body,
-                    activeAt: new Date(),
-                    password: hashedPassword
-                }
-            }
-        )
-
-        const newUser = await User.findOne({ _id: id })
-        res.status(200).json(newUser)
-    } catch (err) {
-        handleError(err, res)
-    }
-}
-
 //* get all users
 exports.getAllUsers = async (req, res) => {
     try {
