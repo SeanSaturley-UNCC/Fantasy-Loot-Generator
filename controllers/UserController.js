@@ -45,7 +45,7 @@ exports.loginUser = async (req, res) => {
         }).select(['+password'])
 
         if (!foundUser) {
-            throw new Error('User not found')
+            throw new Error('Invalid Username or Password')
         }
         const check = await foundUser.comparePassword(data.password)
         if (!check) {
@@ -104,12 +104,13 @@ exports.createUser = async (req, res) => {
 
         const usernameExists = await User.exists({ username: body.username })
         if (usernameExists) {
-            // throw new Error('Username already exists')
-            return res.status(400).json({ message: 'Username already exists' })
+            throw new Error('Username already exists')
+            // return res.status(400).json({ message: 'Username already exists' })
         }
         const emailExists = await User.exists({ email: body.email })
         if (emailExists) {
-            return res.status(400).json({ message: 'Email already exists' })
+            throw new Error('Email already exists')
+            // return res.status(400).json({ message: 'Email already exists' })
         }
 
         const hashedPassword = await hashPassword(body.password)

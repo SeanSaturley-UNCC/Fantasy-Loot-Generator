@@ -32,7 +32,7 @@ const Login = () => {
       });
       navigate('/home')
     } catch (error) {
-      window.location.reload()
+        alert('Login failed. ' + error.response.data.message)
     }
   };
 

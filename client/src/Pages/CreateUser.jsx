@@ -8,7 +8,6 @@ const CreateUser = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [error, setError] = useState(null);
   const navigate = useNavigate();
   
   useEffect(() => {
@@ -43,7 +42,7 @@ const CreateUser = () => {
       // Redirect to login page after successful creation
       navigate('/login');
     } catch (error) {
-        setError(error.response.data.message)
+        alert('Error creating user: ' + error.response.data.message)
     }
   };
 
@@ -95,8 +94,6 @@ const CreateUser = () => {
             required
           />
         </div>
-
-        {error && <div className="error">{error}</div>}
 
         <button type="submit">Create Account</button>
         
