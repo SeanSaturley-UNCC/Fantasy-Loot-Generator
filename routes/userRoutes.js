@@ -6,7 +6,6 @@ const UserController = require('../controllers/UserController')
 router.route('/')
     //! Create a new user
     .post(
-        authenticate,
         UserController.createUser
     )
     //! Get all users

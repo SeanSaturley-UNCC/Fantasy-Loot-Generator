@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import "../App.css";
 import { generateLoot } from "../requests/lootRequests";
-import { checkSession } from "../requests/userRequests";
+import { checkSession, logoutUser } from "../requests/userRequests";
 import { useNavigate } from "react-router-dom";
 
 export const App = () => {
@@ -9,14 +9,15 @@ export const App = () => {
     const [initializing, setInitializing] = useState(true);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [user, setUser] = useState(null);
     const navigate = useNavigate()
 
     useEffect(() => {
         const handleCheckSession = async () => {
             try {
-                const test = await checkSession()
-                console.log('test ==> ', test)
-                if (!test.username) {
+                const userToBe = await checkSession()
+                setUser(userToBe);
+                if (!userToBe.username) {
                     navigate('/login')
                 }
                 setInitializing(false);
@@ -39,6 +40,15 @@ export const App = () => {
         setLoading(false);
     };
 
+    const handleLogout = useCallback(async () => {
+        try {
+            await logoutUser(user?._id);
+            navigate('/login')
+        } catch (error) {
+            
+        }
+    }, [user, navigate]);
+
     const rarityColors = {
         Common: "#9E9E9E",
         Uncommon: "#388E3C",
@@ -55,13 +65,33 @@ export const App = () => {
         <div className="App">
             <h1>Fantasy Loot Generator</h1>
 
-            <button
-                className="generate-btn"
-                onClick={handleGenerateItem}
-                disabled={loading}
-            >
-                {loading ? "Generating…" : "Generate Item"}
-            </button>
+            <p>Welcome, <strong>{user?.username}</strong>!</p>
+
+            <div style={{ display: 'flex', gap: '15px', justifyContent: 'center', alignItems: 'center' }}>
+                <button
+                    className="generate-btn"
+                    onClick={handleGenerateItem}
+                    disabled={loading}
+                >
+                    {loading ? "Generating…" : "Generate Item"}
+                </button>
+
+                <button
+                    className="logout-btn"
+                    onClick={handleLogout}
+                    style={{
+                        backgroundColor: '#dc3545',
+                        color: 'white',
+                        border: 'none',
+                        padding: '10px 20px',
+                        borderRadius: '5px',
+                        cursor: 'pointer',
+                        fontSize: '16px'
+                    }}
+                >
+                    Logout
+                </button>
+            </div>
 
             {error && <div className="error">{error}</div>}
 

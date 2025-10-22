@@ -72,7 +72,7 @@ exports.logoutUser = async (req, res) => {
         if (!userExists) {
             throw new Error('User not found')
         }
-        await Session.Session.deleteOne({
+        await Session.Session.deleteMany({
             userId
         })
         res.status(200).end()
@@ -101,6 +101,17 @@ exports.checkSession = async (req, res) => {
 exports.createUser = async (req, res) => {
     try {
         const { body } = req
+
+        const usernameExists = await User.exists({ username: body.username })
+        if (usernameExists) {
+            // throw new Error('Username already exists')
+            return res.status(400).json({ message: 'Username already exists' })
+        }
+        const emailExists = await User.exists({ email: body.email })
+        if (emailExists) {
+            return res.status(400).json({ message: 'Email already exists' })
+        }
+
         const hashedPassword = await hashPassword(body.password)
 
         const createdUser = await User.create({

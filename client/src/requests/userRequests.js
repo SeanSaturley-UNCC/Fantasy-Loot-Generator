@@ -26,7 +26,7 @@ export function loginUser(credentials) {
 // receives userId
 // returns logout response
 export function logoutUser(userId) {
-    return $axios.put(`/users/logout/${userId}`).then(d => d.data);
+    return $axios.put(`/users/logout/${userId.toString()}`).then(d => d.data);
 }
 
 // returns session status

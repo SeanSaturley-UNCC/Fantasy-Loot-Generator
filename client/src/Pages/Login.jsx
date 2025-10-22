@@ -26,16 +26,13 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-    //   console.log({
-    //     username,
-    //     password
-    //   })
       await loginUser({
         username,
         password
       });
+      navigate('/home')
     } catch (error) {
-      // Empty catch block as requested
+      window.location.reload()
     }
   };
 
@@ -66,6 +63,23 @@ const Login = () => {
           />
         </div>
         <button type="submit">Login</button>
+        
+        <button 
+          type="button"
+          onClick={() => navigate('/create-user')}
+          style={{ 
+            marginTop: '15px',
+            backgroundColor: '#28a745',
+            color: 'white',
+            border: 'none',
+            padding: '10px 20px',
+            borderRadius: '5px',
+            cursor: 'pointer',
+            fontSize: '16px'
+          }}
+        >
+          Create New Account
+        </button>
       </form>
     </div>
   );
