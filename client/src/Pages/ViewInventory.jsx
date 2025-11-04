@@ -81,7 +81,7 @@ export const ViewInventory = () => {
 
     return (
         <div className="App">
-            <h1>Your Inventory</h1>
+            <h1>Your Inventory - {inventory.length} item(s)</h1>
 
             <p>Welcome, <strong>{user?.username}</strong>!</p>
 
