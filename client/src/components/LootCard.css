@@ -1,0 +1,206 @@
+.loot-card-container {
+    perspective: 1000px;
+    width: 250px;
+    height: 320px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.loot-card {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.loot-card.flipped {
+    transform: rotateY(180deg);
+}
+
+.loot-card-front,
+.loot-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loot-card-front {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.loot-card-back {
+    color: #212529;
+    transform: rotateY(180deg);
+}
+
+/* Dynamic rarity-based gradients for card backs */
+.loot-card-back.common {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.loot-card-back.uncommon {
+    background: linear-gradient(135deg, #f1f8e9 0%, #e8f5e8 20%, #f8f9fa 100%);
+}
+
+.loot-card-back.rare {
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 20%, #f8f9fa 100%);
+}
+
+.loot-card-back.epic {
+    background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 20%, #f8f9fa 100%);
+}
+
+.loot-card-back.legendary {
+    background: linear-gradient(135deg, #fffde7 0%, #fff9c4 20%, #fff59d 40%, #f8f9fa 100%);
+    position: relative;
+}
+
+/* Special shimmer effect for legendary cards */
+.loot-card-back.legendary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.2), transparent);
+    animation: shimmer 3s infinite;
+    border-radius: 10px;
+}
+
+@keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+.rarity-border {
+    width: 90%;
+    height: 90%;
+    border: 3px solid;
+    border-radius: 8px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.item-name {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 10px 0 5px 0;
+    text-align: center;
+    line-height: 1.2;
+}
+
+.item-type {
+    font-size: 14px;
+    margin: 5px 0;
+    opacity: 0.8;
+}
+
+.item-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.rarity-badge {
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.stats-section,
+.effects-section {
+    text-align: left;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 8px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.stats-section p,
+.effects-section p {
+    margin: 0 0 5px 0;
+    font-weight: bold;
+    color: #495057;
+    font-size: 13px;
+}
+
+.stats-section ul,
+.effects-section ul {
+    font-size: 13px;
+    list-style-type: disc;
+    margin: 0;
+    padding-left: 18px;
+    color: #343a40;
+    line-height: 1.4;
+}
+
+.stats-section li,
+.effects-section li {
+    text-align: left;
+    margin-bottom: 3px;
+    font-weight: 500;
+}
+
+.flip-hint {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    text-align: center;
+}
+
+/* Hover effects */
+.loot-card-container:hover .loot-card {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.loot-card-container:hover .loot-card.flipped {
+    transform: rotateY(180deg) translateY(-5px);
+}
+
+/* Button styles within the card */
+.loot-card button {
+    transition: all 0.2s ease;
+    z-index: 10;
+    position: relative;
+}
+
+.loot-card button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .loot-card-container {
+        width: 220px;
+        height: 300px;
+    }
+    
+    .item-name {
+        font-size: 14px;
+    }
+    
+    .item-icon {
+        font-size: 40px;
+    }
+}

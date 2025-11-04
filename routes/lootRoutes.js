@@ -17,4 +17,18 @@ router.route(
     loot.saveLoot
 )
 
+router.route(
+    '/inventory/:userId'
+).get(
+    authenticate,
+    loot.getUserInventory
+)
+
+router.route(
+    '/discard/:lootId'
+).delete(
+    authenticate,
+    loot.discardLoot
+)
+
 module.exports = router;
