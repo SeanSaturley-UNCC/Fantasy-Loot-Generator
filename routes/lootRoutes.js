@@ -6,8 +6,15 @@ const { authenticate } = require('../utils');
 router.route('/generate')
     //! Generate a new loot item
     .get(
-        // authenticate,
+        authenticate,
         loot.generateLoot
     )
+
+router.route(
+    '/save'
+).post(
+    authenticate,
+    loot.saveLoot
+)
 
 module.exports = router;

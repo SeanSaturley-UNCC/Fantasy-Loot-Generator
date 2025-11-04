@@ -1,7 +1,6 @@
 const Session = require('../models/Session')
 const { handleError } = require('../utils')
 const { v4: uuid } = require('uuid')
-const User = require('../models/User')
 
 exports.findSession = async (req) => {
     const sessionId = req.signedCookies.User

@@ -21,6 +21,12 @@ const userSchema = new mongoose.Schema(
 
       trim: true,
     },
+    inventory: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Loot',
+      }
+    ],
     password: {
       type: String,
       required: true,

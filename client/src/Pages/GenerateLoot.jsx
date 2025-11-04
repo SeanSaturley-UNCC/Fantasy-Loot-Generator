@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import "../App.css";
-import { generateLoot } from "../requests/lootRequests";
+import { generateLoot, saveLoot } from "../requests/lootRequests";
 import { checkSession, logoutUser } from "../requests/userRequests";
 import { useNavigate } from "react-router-dom";
 
@@ -48,6 +48,17 @@ export const App = () => {
             
         }
     }, [user, navigate]);
+
+    const handleSaveLoot = async (
+        loot
+    ) => {
+        try {
+            await saveLoot(loot)
+            alert('Item saved successfully!')
+        } catch (err) {
+            alert('Failed to save item. ' + err.message)
+        }
+    }
 
     const rarityColors = {
         Common: "#9E9E9E",
@@ -131,6 +142,23 @@ export const App = () => {
                             </ul>
                         </>
                     )}
+
+                    <button
+                        className="save-item-btn"
+                        onClick={() => handleSaveLoot(item)}
+                        style={{
+                            backgroundColor: '#28a745',
+                            color: 'white',
+                            border: 'none',
+                            padding: '8px 16px',
+                            borderRadius: '5px',
+                            cursor: 'pointer',
+                            fontSize: '14px',
+                            marginTop: '15px'
+                        }}
+                    >
+                        Save Item
+                    </button>
                 </div>
             )}
         </div>
