@@ -114,21 +114,33 @@ export const App = () => {
 
             {error && <div className="error">{error}</div>}
 
-            {item && (
-                <div style={{ 
-                    display: 'flex', 
-                    justifyContent: 'center', 
-                    alignItems: 'center',
-                    marginTop: '30px'
-                }}>
+            <div style={{ 
+                display: 'flex', 
+                justifyContent: 'center', 
+                alignItems: 'center',
+                marginTop: '30px'
+            }}>
+                {item ? (
                     <LootCard
                         item={item}
                         buttonText="Save Item to Inventory"
                         buttonColor="#28a745"
                         onButtonClick={handleSaveLoot}
                     />
-                </div>
-            )}
+                ) : (
+                    <LootCard
+                        item={{
+                            name: "Generate Your First Item",
+                            type: "Mystery",
+                            rarity: "Common",
+                            stats: [{ stat: "Excitement", value: "∞" }],
+                            effects: ["Click the button above to begin your adventure!"]
+                        }}
+                        buttonText={null}
+                        onButtonClick={null}
+                    />
+                )}
+            </div>
         </div>
     );
 }
