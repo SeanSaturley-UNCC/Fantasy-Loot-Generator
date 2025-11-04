@@ -11,9 +11,8 @@ const Login = () => {
     useEffect(() => {
         const handleCheckSession = async () => {
             try {
-                const test = await checkSession()
-                console.log('test ==> ', test)
-                if (!!test.username) {
+                const session = await checkSession()
+                if (!!session.username) {
                     navigate('/home')
                 }
             } catch (err) {

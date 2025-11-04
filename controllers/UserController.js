@@ -91,7 +91,6 @@ exports.checkSession = async (req, res) => {
         const loggedInUser = await User.findOne({
             _id: existingSession.userId
         }).populate('inventory')
-        console.log('loggedInUser ==> ', loggedInUser.inventory)
 
         res.status(200).json(loggedInUser)
     } catch (err) {
