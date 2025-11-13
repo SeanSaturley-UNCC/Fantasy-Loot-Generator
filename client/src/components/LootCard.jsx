@@ -31,28 +31,33 @@ export const LootCard = ({
         ...buttonStyle
     };
 
-    // Generate a placeholder image based on type
+    // Generate an image based on type
     const getItemImage = (type) => {
+        const imageMap = {
+            Sword: 'Fire Sword.png',
+            Shield: 'Shield.png',
+            Potion: 'Healing Potion.png',
+            Bow: 'Bow.png',
+            Armor: 'Chainmail Vest.png'
+        };
+        
+        const imageName = imageMap[type] || 'Blindbox.png';
+        
         return (
-            <div 
-                className="item-image-placeholder"
+            <img 
+                src={`/images/${imageName}`}
+                alt={type}
                 style={{
                     width: '80px',
                     height: '80px',
-                    backgroundColor: '#e9ecef',
-                    border: '2px dashed #6c757d',
-                    borderRadius: '8px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontSize: '12px',
-                    color: '#6c757d',
-                    textAlign: 'center',
-                    marginBottom: '10px'
+                    objectFit: 'contain',
+                    marginBottom: '10px',
+                    filter: 'drop-shadow(2px 2px 4px rgba(0,0,0,0.3))'
                 }}
-            >
-                {type}<br/>Image
-            </div>
+                onError={(e) => {
+                    e.target.style.display = 'none';
+                }}
+            />
         );
     };
 
