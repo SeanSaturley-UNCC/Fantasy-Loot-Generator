@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
-
 // schema definning
 const userSchema = new mongoose.Schema(
   {
@@ -22,39 +21,28 @@ const userSchema = new mongoose.Schema(
 
       trim: true,
     },
+    inventory: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Loot',
+      }
+    ],
     password: {
       type: String,
       required: true,
-    },
-    
-    
-    // May or may not remove this
-    createdAt: {
-      type: Date,
-      default: Date.now,
-    },
+      select: false // * when calling User.find(...) it will automatically hide the password (for security)
+    }
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+    versionKey: false
+  }
 );
 
-// hashes the users' password before saving
-userSchema.pre('save', async function (next) {
-
-  if (!this.isModified('password')) return next();
-  try {
-    const salt = await bcrypt.genSalt(10);
-    this.password = await bcrypt.hash(this.password, salt);
-    next();
-  } catch (err) {
-    next(err);
-  }
-});
-
+// instance method to compare passwords
 userSchema.methods.comparePassword = async function (candidatePassword) {
-  return await bcrypt.compare(candidatePassword, this.password);
-};
-
-
+    return await bcrypt.compare(candidatePassword.toString(), this.password.toString())
+}
 
 const User = mongoose.model('User', userSchema);
 
