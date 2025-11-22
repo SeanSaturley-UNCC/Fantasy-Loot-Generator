@@ -1,41 +1,44 @@
-# Installation & Setup
+# 🚀 Docker Full Stack Template
 
-## Follow these steps to run the project locally.
+**Author:** Peyton Santo
 
-### 1. Clone the Repository
+A simple full-stack Docker template for development and production.
 
-```git clone https://github.com/SeanSaturley-UNCC/Fantasy-Loot-Generator.git```
+---
 
-### 2. Install Dependencies
+## 🧰 1. Installation
 
-Install client dependencies:
+Make sure you have the following installed:
+
+- [Docker Compose](https://docs.docker.com/compose/install/)  
+- (Dev only) [NPM](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+
+---
+
+## 🏃 2. Running the Project
+
+### Production
+```bash
+docker compose -f docker-compose.prod.yml up --build -d
 ```
-cd client
-npm install
-```
-Install server/root dependencies:
-```
-cd ../
-npm install
-```
-### 3. Configure Environment Variables
 
-Copy the example environment file:
-```
-cp .env.example .env
-```
-Edit .env as needed to match your configuration.
-
-### 4. Run the Development Environment
-
-Start the project:
-```
+### Development
+```bash
 npm run dev
 ```
-### Requirements
 
-Node.js (LTS recommended)
+## 3. Other Notes
 
-npm
+- You can update the ports where the client/server/database are running if necessary.  
+  **Defaults are shown below:**
+* Client: 1234
+* Server: 5678
+* Database: 1919
 
-Git
+
+- This build has only been tested on **Linux**.  
+Please let me know of any issues that arise from running on **Windows** or **macOS**.
+
+---
+
+✅ **Tip:** Keep your environment variables and port mappings consistent across the `docker-compose.yml` and any client configuration files.

@@ -1,28 +1,28 @@
 {
-  "name": "fantasy-loot-project5",
+  "name": "docker_fullstack_template",
   "version": "1.0.0",
-  "private": true,
-  "type": "commonjs",
+  "description": "",
+  "main": "types.js",
   "scripts": {
-    "start": "node app.js",
-    "dev:api": "nodemon app.js",
-    "dev:web": "npm --prefix client start",
-    "dev": "npm-run-all -p dev:*"
+    "dev": "docker compose build --no-cache client; docker compose up -d",
+    "start": "docker compose -f docker-compose.prod.yml up --build -d",
+    "stop": "docker compose stop",
+    "destroy": "docker compose -f docker-compose.prod.yml down -v",
+
+    "enterdatabase": "docker exec -it docker_template_database mongosh -u root -p examplepassword --authenticationDatabase admin mydb",
+    "serverlogs": "docker logs -f docker_template_server",
+    "clientlogs": "docker logs -f docker_template_client"
   },
-  "dependencies": {
-    "bcrypt": "^6.0.0",
-    "cookie-parser": "^1.4.7",
-    "cors": "^2.8.5",
-    "dotenv": "^17.2.3",
-    "ejs": "^3.1.9",
-    "express": "^5.1.0",
-    "helmet": "^7.0.0",
-    "mongoose": "^8.19.1",
-    "morgan": "^1.10.0",
-    "uuid": "^13.0.0"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PJSanto429/Docker-Fullstack-Template.git"
   },
-  "devDependencies": {
-    "nodemon": "^3.1.0",
-    "npm-run-all": "^4.1.5"
-  }
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/PJSanto429/Docker-Fullstack-Template/issues"
+  },
+  "homepage": "https://github.com/PJSanto429/Docker-Fullstack-Template#readme"
 }
