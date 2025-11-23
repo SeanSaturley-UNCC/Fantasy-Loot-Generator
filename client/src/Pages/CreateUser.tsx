@@ -48,68 +48,65 @@ const CreateUser = () => {
 
   return (
     <div className="login-container">
-      <h2>Fantasy Loot Generator Sign Up</h2>
+      <h2>⚔️ Create Your Account</h2>
       <form onSubmit={handleCreateUser}>
         <div className="form-group">
-          <label htmlFor="username">Username:</label>
+          <label htmlFor="username">Username</label>
           <input
             type="text"
             id="username"
             name="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            placeholder="Choose a username"
             required
           />
         </div>
         <div className="form-group">
-          <label htmlFor="email">Email:</label>
+          <label htmlFor="email">Email</label>
           <input
             type="email"
             id="email"
             name="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter your email"
             required
           />
         </div>
         <div className="form-group">
-          <label htmlFor="password">Password:</label>
+          <label htmlFor="password">Password</label>
           <input
             type="password"
             id="password"
             name="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            placeholder="Create a password"
             required
           />
         </div>
         <div className="form-group">
-          <label htmlFor="confirmPassword">Confirm Password:</label>
+          <label htmlFor="confirmPassword">Confirm Password</label>
           <input
             type="password"
             id="confirmPassword"
             name="confirmPassword"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
+            placeholder="Confirm your password"
             required
           />
         </div>
 
         <button type="submit">Create Account</button>
         
+        <div className="divider">or</div>
+        
         <button 
           type="button"
+          className="secondary-button"
           onClick={() => navigate('/login')}
-          style={{ 
-            marginTop: '15px',
-            backgroundColor: '#28a745',
-            color: 'white',
-            border: 'none',
-            padding: '10px 20px',
-            borderRadius: '5px',
-            cursor: 'pointer',
-            fontSize: '16px'
-          }}
         >
           Back to Login
         </button>

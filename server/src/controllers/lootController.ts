@@ -3,9 +3,8 @@ import { generateItem, Loot } from '../Models/lootModel'
 import User from '../Models/User'
 import { handleError } from '../middleware/utils'
 
-export const generateLoot = (_req: Request, res: Response, next: NextFunction): void => {
+export const generateLoot = (_req: Request, res: Response, next: NextFunction) => {
     try {
-        
         const item = generateItem()
         res.json(item)
     } catch (err) {
@@ -17,13 +16,14 @@ export const saveLoot = async (req: Request, res: Response): Promise<void> => {
     try {
         const { body } = req
         const user = res.locals.user
+        const lootData = body.loot
 
         // Check if loot with exact same parameters already exists
         const existingLoot = await Loot.findOne({
-            name: body.name,
-            type: body.type,
-            rarity: body.rarity,
-            value: body.value
+            name: lootData.name,
+            type: lootData.type,
+            rarity: lootData.rarity,
+            value: lootData.value
         })
 
         if (existingLoot) {
@@ -34,8 +34,7 @@ export const saveLoot = async (req: Request, res: Response): Promise<void> => {
             return
         }
 
-        const savedLoot = await Loot.create(body)
-
+        const savedLoot = await Loot.create(lootData)
         await User.updateOne(
             {
                 _id: user._id

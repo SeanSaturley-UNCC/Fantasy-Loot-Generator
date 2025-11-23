@@ -4,21 +4,22 @@ import { GenerateLoot } from "./Pages/GenerateLoot"
 import { ViewInventory } from "./Pages/ViewInventory"
 import Login from "./Pages/Login"
 import CreateUser from "./Pages/CreateUser"
+import { Layout } from './components/Layout'
 
 export const App = () => {
     return (
         <Router>
-            <div className="App">
+            <Layout>
                 <Routes>
-                <Route path="/home" element={<GenerateLoot />} />
-                <Route path="/generate" element={<GenerateLoot />} />
-                <Route path="/inventory" element={<ViewInventory />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/create-user" element={<CreateUser />} />
-                <Route path="/" element={<Navigate to="/home" replace />} />
-                <Route path="*" element={<Navigate to="/home" replace />} />
+                    <Route path="/home" element={<GenerateLoot />} />
+                    <Route path="/generate" element={<GenerateLoot />} />
+                    <Route path="/inventory" element={<ViewInventory />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/create-user" element={<CreateUser />} />
+                    <Route path="/" element={<Navigate to="/home" replace />} />
+                    <Route path="*" element={<Navigate to="/home" replace />} />
                 </Routes>
-            </div>
+            </Layout>
         </Router>
     )
 }

@@ -83,41 +83,6 @@ export const ViewInventory = () => {
         <div className="App">
             <h1>Your Inventory - {inventory.length} item(s)</h1>
 
-            <p>Welcome, <strong>{user?.username}</strong>!</p>
-
-            <div style={{ display: 'flex', gap: '15px', justifyContent: 'center', alignItems: 'center', marginBottom: '20px' }}>
-                <button
-                    onClick={() => navigate('/generate')}
-                    style={{
-                        backgroundColor: '#007bff',
-                        color: 'white',
-                        border: 'none',
-                        padding: '10px 20px',
-                        borderRadius: '5px',
-                        cursor: 'pointer',
-                        fontSize: '16px'
-                    }}
-                >
-                    Generate More Loot
-                </button>
-
-                <button
-                    className="logout-btn"
-                    onClick={handleLogout}
-                    style={{
-                        backgroundColor: '#dc3545',
-                        color: 'white',
-                        border: 'none',
-                        padding: '10px 20px',
-                        borderRadius: '5px',
-                        cursor: 'pointer',
-                        fontSize: '16px'
-                    }}
-                >
-                    Logout
-                </button>
-            </div>
-
             {/* Sorting Controls */}
             <div style={{ 
                 display: 'flex', 

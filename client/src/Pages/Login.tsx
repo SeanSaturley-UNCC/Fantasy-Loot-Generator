@@ -29,7 +29,7 @@ const Login = () => {
         username,
         password
       });
-      navigate('/home')
+    window.location.reload()
     } catch (error: any) {
         // @ts-ignore
         alert('Login failed. ' + error?.response?.data?.message ?? 'Unknown error occurred.')
@@ -38,45 +38,40 @@ const Login = () => {
 
   return (
     <div className="login-container">
-      <h2>Fantasy Loot Generator Login</h2>
+      <h2>⚔️ Fantasy Loot Generator</h2>
         <form onSubmit={handleLogin}>
         <div className="form-group">
-          <label htmlFor="username">Username:</label>
+          <label htmlFor="username">Username</label>
           <input
             type="text"
             id="username"
             name="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            placeholder="Enter your username"
             required
           />
         </div>
         <div className="form-group">
-          <label htmlFor="password">Password:</label>
+          <label htmlFor="password">Password</label>
           <input
             type="password"
             id="password"
             name="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            placeholder="Enter your password"
             required
           />
         </div>
         <button type="submit">Login</button>
         
+        <div className="divider">or</div>
+        
         <button 
           type="button"
+          className="secondary-button"
           onClick={() => navigate('/create-user')}
-          style={{ 
-            marginTop: '15px',
-            backgroundColor: '#28a745',
-            color: 'white',
-            border: 'none',
-            padding: '10px 20px',
-            borderRadius: '5px',
-            cursor: 'pointer',
-            fontSize: '16px'
-          }}
         >
           Create New Account
         </button>

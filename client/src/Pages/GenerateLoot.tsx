@@ -4,10 +4,10 @@ import { generateLoot, saveLoot } from "../requests/lootRequests";
 import { checkSession, logoutUser } from "../requests/userRequests";
 import { useNavigate } from "react-router-dom";
 import { LootCard } from "../components/LootCard";
-import { LootItem, SaveLootBody, User, UserData } from "../Types";
+import { LootDocument, SaveLootBody } from "../Types";
 
 export const GenerateLoot = () => {
-    const [item, setItem] = useState<LootItem | null>(null);
+    const [item, setItem] = useState<LootDocument | null>(null);
     const [initializing, setInitializing] = useState(true);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
@@ -35,7 +35,7 @@ export const GenerateLoot = () => {
         setError('');
         try {
             const data = await generateLoot();
-            setItem(data);
+            setItem(data as any);
         } catch (error: any) {
             setError('Failed to generate item. ' + error.message);
         }
@@ -53,14 +53,23 @@ export const GenerateLoot = () => {
         }
     }, [user, navigate]);
 
-    const handleSaveLoot = async (
-        loot: SaveLootBody
-    ) => {
+    const handleSaveLoot = async (lootItem: LootDocument) => {
         try {
-            await saveLoot(loot)
+            const body: SaveLootBody = {
+                userId: user._id,
+                loot: {
+                    name: lootItem.name,
+                    type: lootItem.type,
+                    rarity: lootItem.rarity,
+                    description: '',
+                    value: lootItem.value
+                }
+            }
+            await saveLoot(body)
             alert('Item saved successfully!')
         } catch (err: any) {
-            alert('Failed to save item. ' + err.message)
+            // @ts-ignore
+            alert('Failed to save item. ' + err?.response?.data?.error ?? 'Unknown error occurred.')
         }
     }
 
@@ -72,9 +81,7 @@ export const GenerateLoot = () => {
         <div className="App">
             <h1>Fantasy Loot Generator</h1>
 
-            <p>Welcome, <strong>{user?.username}</strong>!</p>
-
-            <div style={{ display: 'flex', gap: '5px', justifyContent: 'center', alignItems: 'center' }}>
+            <div style={{ display: 'flex', gap: '5px', justifyContent: 'center', alignItems: 'center', marginTop: '20px' }}>
                 <button
                     className="generate-btn"
                     onClick={handleGenerateItem}
@@ -83,36 +90,6 @@ export const GenerateLoot = () => {
                     {loading ? "Generating…" : "Generate Item"}
                 </button>
 
-                <button
-                    onClick={() => navigate('/inventory')}
-                    style={{
-                        backgroundColor: '#28a745',
-                        color: 'white',
-                        border: 'none',
-                        padding: '10px 20px',
-                        borderRadius: '5px',
-                        cursor: 'pointer',
-                        fontSize: '16px'
-                    }}
-                >
-                    View Inventory
-                </button>
-
-                <button
-                    className="logout-btn"
-                    onClick={handleLogout}
-                    style={{
-                        backgroundColor: '#dc3545',
-                        color: 'white',
-                        border: 'none',
-                        padding: '10px 20px',
-                        borderRadius: '5px',
-                        cursor: 'pointer',
-                        fontSize: '16px'
-                    }}
-                >
-                    Logout
-                </button>
             </div>
 
             {error && <div className="error">{error}</div>}
@@ -133,14 +110,16 @@ export const GenerateLoot = () => {
                 ) : (
                     <LootCard
                         item={{
+                            _id: 'placeholder',
                             name: "Generate Your First Item",
-                            type: "Mystery",
+                            type: "Sword",
                             rarity: "Common",
-                            stats: [{ stat: "Excitement", value: "∞" }],
-                            effects: ["Click the button above to begin your adventure!"]
-                        }}
-                        buttonText={null}
-                        onButtonClick={null}
+                            stats: [{ stat: "Excitement", value: 100 }],
+                            effects: ["Click the button above to begin your adventure!"],
+                            value: 0,
+                            createdAt: new Date(),
+                            updatedAt: new Date()
+                        } as any}
                     />
                 )}
             </div>

@@ -1,32 +1,5 @@
-/**
- * models/lootModel.ts
- * Clean loot generator with weighted rarity, type-based effects, and stats
- */
-
-import mongoose, { Document, Schema } from 'mongoose'
-
-// Interfaces
-export interface LootStats {
-    stat: string
-    value: number
-}
-
-export interface LootDocument extends Document {
-    name: string
-    type: 'Sword' | 'Shield' | 'Potion' | 'Bow' | 'Armor'
-    rarity: 'Common' | 'Uncommon' | 'Rare' | 'Epic' | 'Legendary'
-    effects: string[]
-    stats: LootStats[]
-    value: number
-    createdAt: Date
-    updatedAt: Date
-}
-
-interface RarityWeight {
-    name: string
-    weight: number
-    valueMult: number
-}
+import mongoose, { Schema } from 'mongoose'
+import { LootDocument, LootStats, RarityWeight } from '../Types'
 
 // Define schema
 const lootSchema = new Schema(

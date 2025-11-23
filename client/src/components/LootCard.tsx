@@ -1,17 +1,17 @@
-
-import React, { useState } from 'react';
+import React, { useState, CSSProperties } from 'react';
 import './LootCard.css';
+import { LootCardProps, RarityType } from '../Types';
 
-export const LootCard = ({ 
+export const LootCard: React.FC<LootCardProps> = ({ 
     item, 
     buttonText, 
     buttonColor = '#28a745', 
     onButtonClick, 
     buttonStyle = {} 
 }) => {
-    const [isFlipped, setIsFlipped] = useState(false);
+    const [isFlipped, setIsFlipped] = useState<boolean>(false);
 
-    const rarityColors = {
+    const rarityColors: Record<RarityType, string> = {
         Common: "#9E9E9E",
         Uncommon: "#388E3C",
         Rare: "#1E88E5",
@@ -19,7 +19,7 @@ export const LootCard = ({
         Legendary: "#FFD700",
     };
 
-    const defaultButtonStyle = {
+    const defaultButtonStyle: CSSProperties = {
         backgroundColor: buttonColor,
         color: 'white',
         border: 'none',
@@ -32,7 +32,7 @@ export const LootCard = ({
     };
 
     // Generate an image based on item name
-    const getItemImage = (itemName) => {
+    const getItemImage = (itemName: string): React.ReactElement => {
         // Use the item name directly to match the image file
         const imageName = `${itemName}.png`;
         
@@ -47,21 +47,23 @@ export const LootCard = ({
                     marginBottom: '10px',
                     filter: 'drop-shadow(2px 2px 4px rgba(0,0,0,0.3))'
                 }}
-                onError={(e) => {
+                onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+                    const target = e.target as HTMLImageElement;
                     // Fallback to Blindbox if image not found
-                    if (e.target.src.indexOf('Blindbox.png') === -1) {
-                        e.target.src = '/images/Blindbox.png';
+                    if (target.src.indexOf('Blindbox.png') === -1) {
+                        target.src = '/images/Blindbox.png';
                     } else {
-                        e.target.style.display = 'none';
+                        target.style.display = 'none';
                     }
                 }}
             />
         );
     };
 
-    const handleCardClick = (e) => {
+    const handleCardClick = (e: React.MouseEvent<HTMLDivElement>): void => {
         // Don't flip if clicking on a button
-        if (e.target.tagName === 'BUTTON') return;
+        const target = e.target as HTMLElement;
+        if (target.tagName === 'BUTTON') return;
         setIsFlipped(!isFlipped);
     };
 
