@@ -9,9 +9,9 @@
     "stop": "docker compose stop",
     "destroy": "docker compose -f docker-compose.prod.yml down -v",
 
-    "enterdatabase": "docker exec -it docker_template_database mongosh -u root -p examplepassword --authenticationDatabase admin mydb",
-    "serverlogs": "docker logs -f docker_template_server",
-    "clientlogs": "docker logs -f docker_template_client"
+    "enterdatabase": "docker exec -it Fantasy_Loot_Generator_database mongosh -u root -p examplepassword --authenticationDatabase admin mydb",
+    "serverlogs": "docker logs -f Fantasy_Loot_Generator_server",
+    "clientlogs": "docker logs -f Fantasy_Loot_Generator_client"
   },
   "repository": {
     "type": "git",

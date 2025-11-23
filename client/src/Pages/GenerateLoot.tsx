@@ -19,12 +19,10 @@ export const GenerateLoot = () => {
             try {
                 const userToBe = await checkSession()
                 setUser(userToBe)
-                if (!userToBe?.username) {
-                    navigate('/login')
-                }
                 setInitializing(false);
             } catch (err) {
-                navigate('/login')
+                console.error('Error loading session:', err);
+                setInitializing(false);
             }
         }
         handleCheckSession();

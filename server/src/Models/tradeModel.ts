@@ -4,16 +4,16 @@ import { TradeData } from '../Types'
 // Define schema
 const tradeSchema = new Schema(
     {
-        offeredItem: {
+        offeredItems: [{
             type: Schema.Types.ObjectId,
             ref: 'Loot',
             required: true
-        },
-        requestedItem: {
+        }],
+        requestedItems: [{
             type: Schema.Types.ObjectId,
             ref: 'Loot',
             required: true
-        },
+        }],
         offeredByUser: {
             type: Schema.Types.ObjectId,
             ref: 'User',

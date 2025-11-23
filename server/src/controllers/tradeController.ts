@@ -7,12 +7,16 @@ import { handleError } from '../middleware/utils'
 // Create a new trade offer
 export const createTrade = async (req: Request, res: Response): Promise<void> => {
     try {
-        const { offeredItemId, requestedItemId, offeredByUserId, requestedFromUserId } = req.body
+        const { offeredItemIds, requestedItemIds, offeredByUserId, requestedFromUserId } = req.body
 
-        // Validate that the offered item exists and belongs to the sender
-        const offeredItem = await Loot.findById(offeredItemId)
-        if (!offeredItem) {
-            res.status(404).json({ error: 'Offered item not found' })
+        // Validate arrays
+        if (!Array.isArray(offeredItemIds) || offeredItemIds.length === 0) {
+            res.status(400).json({ error: 'Must offer at least one item' })
+            return
+        }
+
+        if (!Array.isArray(requestedItemIds) || requestedItemIds.length === 0) {
+            res.status(400).json({ error: 'Must request at least one item' })
             return
         }
 
@@ -22,39 +26,50 @@ export const createTrade = async (req: Request, res: Response): Promise<void> =>
             return
         }
 
-        const senderOwnsItem = sender.inventory.some(
-            item => item.toString() === offeredItemId.toString()
-        )
-        if (!senderOwnsItem) {
-            res.status(400).json({ error: 'You do not own the offered item' })
-            return
-        }
-
-        // Validate that the requested item exists and belongs to the receiver
-        const requestedItem = await Loot.findById(requestedItemId)
-        if (!requestedItem) {
-            res.status(404).json({ error: 'Requested item not found' })
-            return
-        }
-
         const receiver = await User.findById(requestedFromUserId)
         if (!receiver) {
             res.status(404).json({ error: 'Receiver user not found' })
             return
         }
 
-        const receiverOwnsItem = receiver.inventory.some(
-            item => item.toString() === requestedItemId.toString()
-        )
-        if (!receiverOwnsItem) {
-            res.status(400).json({ error: 'The requested item is not in the receiver\'s inventory' })
-            return
+        // Validate all offered items exist and belong to sender
+        for (const itemId of offeredItemIds) {
+            const item = await Loot.findById(itemId)
+            if (!item) {
+                res.status(404).json({ error: `Offered item ${itemId} not found` })
+                return
+            }
+
+            const senderOwnsItem = sender.inventory.some(
+                invItem => invItem.toString() === itemId.toString()
+            )
+            if (!senderOwnsItem) {
+                res.status(400).json({ error: `You do not own item: ${item.name}` })
+                return
+            }
+        }
+
+        // Validate all requested items exist and belong to receiver
+        for (const itemId of requestedItemIds) {
+            const item = await Loot.findById(itemId)
+            if (!item) {
+                res.status(404).json({ error: `Requested item ${itemId} not found` })
+                return
+            }
+
+            const receiverOwnsItem = receiver.inventory.some(
+                invItem => invItem.toString() === itemId.toString()
+            )
+            if (!receiverOwnsItem) {
+                res.status(400).json({ error: `Receiver does not own item: ${item.name}` })
+                return
+            }
         }
 
         // Create the trade
         const trade = await Trade.create({
-            offeredItem: offeredItemId,
-            requestedItem: requestedItemId,
+            offeredItems: offeredItemIds,
+            requestedItems: requestedItemIds,
             offeredByUser: offeredByUserId,
             requestedFromUser: requestedFromUserId,
             status: 'Pending'
@@ -75,8 +90,8 @@ export const getOneTrade = async (req: Request, res: Response): Promise<void> =>
         const { tradeId } = req.params
 
         const trade = await Trade.findById(tradeId)
-            .populate('offeredItem')
-            .populate('requestedItem')
+            .populate('offeredItems')
+            .populate('requestedItems')
             .populate('offeredByUser', 'username email')
             .populate('requestedFromUser', 'username email')
 
@@ -112,8 +127,8 @@ export const getAllTrades = async (req: Request, res: Response): Promise<void> =
         }
 
         const trades = await Trade.find(query)
-            .populate('offeredItem')
-            .populate('requestedItem')
+            .populate('offeredItems')
+            .populate('requestedItems')
             .populate('offeredByUser', 'username email')
             .populate('requestedFromUser', 'username email')
             .sort({ createdAt: -1 })
@@ -203,39 +218,49 @@ export const approveTrade = async (req: Request, res: Response): Promise<void> =
             return
         }
 
-        // Verify items still exist in respective inventories
-        const offeredItemId = (trade.offeredItem as any)._id || trade.offeredItem
-        const requestedItemId = (trade.requestedItem as any)._id || trade.requestedItem
-
-        const senderHasItem = sender.inventory.some(
-            item => item.toString() === offeredItemId.toString()
-        )
-        const receiverHasItem = receiver.inventory.some(
-            item => item.toString() === requestedItemId.toString()
-        )
-
-        if (!senderHasItem) {
-            res.status(400).json({ error: 'Offered item no longer in sender\'s inventory' })
-            return
+        // Verify all offered items still exist in sender's inventory
+        const offeredItemIds = (trade.offeredItems as any).map((item: any) => (item._id || item).toString())
+        for (const itemId of offeredItemIds) {
+            const senderHasItem = sender.inventory.some(
+                item => item.toString() === itemId
+            )
+            if (!senderHasItem) {
+                res.status(400).json({ error: 'One or more offered items no longer in sender\'s inventory' })
+                return
+            }
         }
 
-        if (!receiverHasItem) {
-            res.status(400).json({ error: 'Requested item no longer in your inventory' })
-            return
+        // Verify all requested items still exist in receiver's inventory
+        const requestedItemIds = (trade.requestedItems as any).map((item: any) => (item._id || item).toString())
+        for (const itemId of requestedItemIds) {
+            const receiverHasItem = receiver.inventory.some(
+                item => item.toString() === itemId
+            )
+            if (!receiverHasItem) {
+                res.status(400).json({ error: 'One or more requested items no longer in your inventory' })
+                return
+            }
         }
 
-        // Perform the swap
-        // Remove offered item from sender, add to receiver
+        // Perform the swap - remove all offered items from sender
         sender.inventory = sender.inventory.filter(
-            item => item.toString() !== offeredItemId.toString()
+            item => !offeredItemIds.includes(item.toString())
         )
-        receiver.inventory.push(offeredItemId as any)
+        
+        // Add all requested items to sender
+        for (const itemId of requestedItemIds) {
+            sender.inventory.push(itemId as any)
+        }
 
-        // Remove requested item from receiver, add to sender
+        // Remove all requested items from receiver
         receiver.inventory = receiver.inventory.filter(
-            item => item.toString() !== requestedItemId.toString()
+            item => !requestedItemIds.includes(item.toString())
         )
-        sender.inventory.push(requestedItemId as any)
+        
+        // Add all offered items to receiver
+        for (const itemId of offeredItemIds) {
+            receiver.inventory.push(itemId as any)
+        }
 
         // Save users and update trade status
         await sender.save()

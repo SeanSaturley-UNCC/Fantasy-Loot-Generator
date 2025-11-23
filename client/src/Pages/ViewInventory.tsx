@@ -20,18 +20,18 @@ export const ViewInventory = () => {
             try {
                 const userToBe: any = await checkSession();
                 setUser(userToBe);
-                if (!userToBe.username) {
-                    navigate('/login');
-                }
                 // Fetch user inventory after authentication
-                await fetchInventory(userToBe._id);
+                if (userToBe?._id) {
+                    await fetchInventory(userToBe._id);
+                }
                 setInitializing(false);
             } catch (err) {
-                navigate('/login');
+                console.error('Error loading session:', err);
+                setInitializing(false);
             }
         };
         handleCheckSession();
-    }, [navigate]);
+    }, []);
 
     const fetchInventory = async (userId: any, sortByParam: string | null = null, sortOrderParam: number | null = null) => {
         setLoading(true);

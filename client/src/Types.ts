@@ -58,8 +58,8 @@ export interface Inventory {
 export type SortOrder = 'asc' | 'desc' | 1 | -1
 
 export interface TradeData {
-    offeredItem: LootDocument
-    requestedItem: LootDocument
+    offeredItems: LootDocument[]
+    requestedItems: LootDocument[]
     offeredByUser: User
     requestedFromUser: User
     status: 'Pending' | 'Accepted' | 'Declined'
@@ -69,8 +69,8 @@ export interface TradeData {
 }
 
 export interface CreateTradeBody {
-    offeredItemId: string
-    requestedItemId: string
+    offeredItemIds: string[]
+    requestedItemIds: string[]
     offeredByUserId: string
     requestedFromUserId: string
 }

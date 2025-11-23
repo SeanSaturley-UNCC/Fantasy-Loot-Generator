@@ -47,6 +47,18 @@ export const NavBar: React.FC<NavBarProps> = ({ username, onLogout }) => {
                     >
                         Inventory
                     </Link>
+                    <Link 
+                        to="/trades" 
+                        className={`navbar-link ${isActive('/trades')}`}
+                    >
+                        View Trades
+                    </Link>
+                    <Link 
+                        to="/create-trade" 
+                        className={`navbar-link ${isActive('/create-trade')}`}
+                    >
+                        Create Trade
+                    </Link>
                 </div>
 
                 <div className="navbar-user">
