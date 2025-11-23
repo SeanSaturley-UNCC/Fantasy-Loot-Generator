@@ -5,6 +5,7 @@ import { handleError } from '../middleware/utils'
 
 export const generateLoot = (_req: Request, res: Response, next: NextFunction): void => {
     try {
+        
         const item = generateItem()
         res.json(item)
     } catch (err) {

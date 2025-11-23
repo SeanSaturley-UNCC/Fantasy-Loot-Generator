@@ -24,8 +24,8 @@ export const getOneUser = async (userId: string): Promise<User> => {
 // receives credentials object
 // returns login response with user data and session info
 export const loginUser = async (credentials: Credentials): Promise<LoginResponse> => {
-    const { data } = await $axios.post('/users/login', credentials);
-    return data;
+    const { data } = await $axios.post('/users/login', credentials)
+    return data
 }
 
 // receives userId

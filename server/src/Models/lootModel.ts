@@ -100,7 +100,35 @@ const rarities: RarityWeight[] = [
 type LootType = 'Sword' | 'Shield' | 'Potion' | 'Bow' | 'Armor'
 
 const types: LootType[] = ['Sword', 'Shield', 'Potion', 'Bow', 'Armor']
-const adjectives = ['Flaming', 'Frozen', 'Shadow', 'Radiant', 'Thunder', 'Venom', 'Blessed', 'Cursed']
+
+// Map item names to their types based on image files
+const itemNamesByType: Record<LootType, string[]> = {
+    Sword: [
+        'Axe', 'Bone Knife', 'Club', 'Crystal Sword', 'Dagger', 'Fire Sword', 
+        'Hammer', 'Ice Sword', 'Katana', 'Poison Sword', 'Stone Knife', 
+        'Celestial Staff', 'Iron Pipe', 'Iron Whip', 'Rusty Mace', 
+        'Leviathan Trident', 'Serpent Spear', 'Spear', 'Crowbar', 
+        'Pickaxe', 'Shovel', 'Screwdriver', 'Flamethrower', 'Laser Gun'
+    ],
+    Bow: ['Bow', 'Crossbow', 'Sling Shot'],
+    Shield: ['Shield', 'Wooden Buckler'],
+    Armor: [
+        'Chainmail Vest', 'Cloak', 'Invisible Cloak', 'Mage Robe', 
+        'Leather Boot', 'Gravity Boot', 'Tin Helmet', 'Protective Goggle',
+        'Leather Wristband', 'Torn Gloves', 'Plain Scarf', 'Utility Belt',
+        'Backpack', 'Iron Knuckles'
+    ],
+    Potion: [
+        'Agility Potion', 'Dragon Blood Potion', 'Fire Resistance Potion',
+        'Frost Skin Potion', 'Healing Potion', 'Immortality Potion',
+        'Invisibility Potion', 'Mana Potion', 'Night Vision Potion',
+        'Poison Potion', 'Stamina Potion', 'Water Breathing Potion',
+        'Fresh Berries', 'Grilled Fish Fillet', 'Ham Sandwich', 'Meat Pie',
+        'Roast Chicken Leg', 'Spiced Stew', 'Steak', 'Sweet Pudding',
+        'Charred Sausage', 'Cinnamon Bun', 'Stale Bread', 'Moldy Cheese',
+        'Wilted Salad', 'Eternal Feast', 'Leftovers', 'Rotten'
+    ]
+}
 
 const effectsByType: Record<LootType, string[]> = {
     Sword: ['Bleed', 'Parry', 'Lifesteal', 'Crit Chance'],
@@ -131,7 +159,9 @@ function rollStatsFor(type: LootType): LootStats[] {
 function generateItem() {
     const type = pick<LootType>(types)
     const rarity = pickWeighted(rarities)
-    const adj = pick(adjectives)
+    
+    // Pick a specific item name from the type category
+    const name = pick(itemNamesByType[type])
 
     const pool = effectsByType[type] || []
     const numEffects = (type === 'Potion') ? 1 : (Math.random() < 0.5 ? 1 : 2)
@@ -145,7 +175,6 @@ function generateItem() {
     const baseValue = Math.floor(Math.random() * 41) + 20
     const value = Math.floor(baseValue * rarityInfo(rarity).valueMult)
 
-    const name = `${adj} ${type}`
     return { name, type, rarity, effects, stats, value }
 }
 

@@ -31,31 +31,29 @@ export const LootCard = ({
         ...buttonStyle
     };
 
-    // Generate an image based on type
-    const getItemImage = (type) => {
-        const imageMap = {
-            Sword: 'Fire Sword.png',
-            Shield: 'Shield.png',
-            Potion: 'Healing Potion.png',
-            Bow: 'Bow.png',
-            Armor: 'Chainmail Vest.png'
-        };
-        
-        const imageName = imageMap[type] || 'Blindbox.png';
+    // Generate an image based on item name
+    const getItemImage = (itemName) => {
+        // Use the item name directly to match the image file
+        const imageName = `${itemName}.png`;
         
         return (
             <img 
                 src={`/images/${imageName}`}
-                alt={type}
+                alt={itemName}
                 style={{
-                    width: '80px',
-                    height: '80px',
+                    width: '120px',
+                    height: '120px',
                     objectFit: 'contain',
                     marginBottom: '10px',
                     filter: 'drop-shadow(2px 2px 4px rgba(0,0,0,0.3))'
                 }}
                 onError={(e) => {
-                    e.target.style.display = 'none';
+                    // Fallback to Blindbox if image not found
+                    if (e.target.src.indexOf('Blindbox.png') === -1) {
+                        e.target.src = '/images/Blindbox.png';
+                    } else {
+                        e.target.style.display = 'none';
+                    }
                 }}
             />
         );
@@ -77,7 +75,7 @@ export const LootCard = ({
                         style={{ borderColor: rarityColors[item.rarity] || "#333" }}
                     >
                         <div className="item-image">
-                            {getItemImage(item.type)}
+                            {getItemImage(item.name)}
                         </div>
                         
                         <h2 
@@ -86,10 +84,6 @@ export const LootCard = ({
                         >
                             {item.name}
                         </h2>
-                        
-                        <div className="item-type">
-                            <strong>{item.type}</strong>
-                        </div>
                         
                         <div 
                             className="rarity-badge"
