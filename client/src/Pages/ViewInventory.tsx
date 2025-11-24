@@ -139,27 +139,6 @@ export const ViewInventory = () => {
                         </select>
                     </>
                 )}
-
-                {sortBy && (
-                    <button
-                        onClick={() => {
-                            setSortBy('');
-                            setSortOrder(1);
-                            handleSortChange(null, null);
-                        }}
-                        style={{
-                            backgroundColor: '#6c757d',
-                            color: 'white',
-                            border: 'none',
-                            padding: '8px 12px',
-                            borderRadius: '4px',
-                            cursor: 'pointer',
-                            fontSize: '14px'
-                        }}
-                    >
-                        Clear Sort
-                    </button>
-                )}
             </div>
 
             {loading && <div>Loading inventory...</div>}
