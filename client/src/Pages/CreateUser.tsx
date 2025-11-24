@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 
 const CreateUser = () => {
   const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const navigate = useNavigate();
@@ -36,7 +35,6 @@ const CreateUser = () => {
     try {
       await createUser({
         username,
-        email,
         password
       });
       // Redirect to login page after successful creation
@@ -59,18 +57,6 @@ const CreateUser = () => {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             placeholder="Choose a username"
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter your email"
             required
           />
         </div>

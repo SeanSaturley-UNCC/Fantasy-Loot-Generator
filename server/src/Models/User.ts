@@ -4,7 +4,6 @@ import bcrypt from 'bcrypt'
 // Interface for User document
 export interface UserDocument extends Document {
     username: string
-    email: string
     inventory: mongoose.Types.ObjectId[]
     password: string
     createdAt: Date
@@ -19,13 +18,6 @@ const userSchema = new Schema<UserDocument>(
             type: String,
             required: true,
             unique: true,
-            trim: true,
-        },
-        email: {
-            type: String,
-            required: true,
-            unique: true,
-            lowercase: true,
             trim: true,
         },
         inventory: [

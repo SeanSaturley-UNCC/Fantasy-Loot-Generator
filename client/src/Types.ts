@@ -1,20 +1,17 @@
 
 export interface UserData {
     username: string
-    email: string
     password: string
 }
 
 export interface Credentials {
-    username?: string
-    email?: string
+    username: string
     password: string
 }
 
 export interface User {
     _id: string
     username: string
-    email: string
     createdAt: Date
     updatedAt?: Date
 }
@@ -26,7 +23,6 @@ export interface LoginResponse {
 
 export interface UpdateData {
     username?: string
-    email?: string
 }
 
 export interface PasswordData {

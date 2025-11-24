@@ -19,6 +19,14 @@ export const LootCard: React.FC<LootCardProps> = ({
         Legendary: "#FFD700",
     };
 
+    const rarityGradients: Record<RarityType, string> = {
+        Common: "linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%)",
+        Uncommon: "linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%)",
+        Rare: "linear-gradient(135deg, #e3f2fd 0%, #90caf9 100%)",
+        Epic: "linear-gradient(135deg, #f3e5f5 0%, #ce93d8 100%)",
+        Legendary: "linear-gradient(135deg, #fff9e6 0%, #ffe082 100%)",
+    };
+
     const defaultButtonStyle: CSSProperties = {
         backgroundColor: buttonColor,
         color: 'white',
@@ -71,7 +79,10 @@ export const LootCard: React.FC<LootCardProps> = ({
         <div className="loot-card-container" onClick={handleCardClick}>
             <div className={`loot-card ${isFlipped ? 'flipped' : ''}`}>
                 {/* Front Side */}
-                <div className="loot-card-front">
+                <div 
+                    className="loot-card-front"
+                    style={{ background: rarityGradients[item.rarity] || "#fff" }}
+                >
                     <div 
                         className="rarity-border"
                         style={{ borderColor: rarityColors[item.rarity] || "#333" }}
@@ -114,7 +125,10 @@ export const LootCard: React.FC<LootCardProps> = ({
                 </div>
 
                 {/* Back Side */}
-                <div className={`loot-card-back ${item.rarity.toLowerCase()}`}>
+                <div 
+                    className={`loot-card-back ${item.rarity.toLowerCase()}`}
+                    style={{ background: rarityGradients[item.rarity] || "#fff" }}
+                >
                     <div 
                         className="rarity-border"
                         style={{ borderColor: rarityColors[item.rarity] || "#333" }}

@@ -10,6 +10,8 @@ interface LootItem {
     type: string;
     rarity: string;
     value: number;
+    stats?: Array<{ stat: string; value: number }>;
+    effects?: string[];
 }
 
 interface User {
@@ -76,9 +78,10 @@ const ViewTrades: React.FC = () => {
                 action: accept ? 'approve' : 'deny' 
             });
             await loadTrades(userId);
-        } catch (error) {
-            console.error('Error responding to trade:', error);
-            alert('Failed to respond to trade');
+        } catch (error: any) {
+            // @ts-ignore
+            console.error('Error responding to trade:', error?.response?.data?.error);
+            alert(error?.response?.data?.error ?? 'Failed to respond to trade');
         }
     };
 
@@ -91,6 +94,17 @@ const ViewTrades: React.FC = () => {
             'Legendary': '#ff9800'
         };
         return colors[rarity] || '#333';
+    };
+
+    const getRarityGradient = (rarity: string) => {
+        const gradients: Record<string, string> = {
+            'Common': 'linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%)',
+            'Uncommon': 'linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%)',
+            'Rare': 'linear-gradient(135deg, #e3f2fd 0%, #90caf9 100%)',
+            'Epic': 'linear-gradient(135deg, #f3e5f5 0%, #ce93d8 100%)',
+            'Legendary': 'linear-gradient(135deg, #fff9e6 0%, #ffe082 100%)'
+        };
+        return gradients[rarity] || 'linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%)';
     };
 
     const calculateTotalValue = (items: LootItem[]) => {
@@ -133,25 +147,76 @@ const ViewTrades: React.FC = () => {
                         <h4>You Give</h4>
                         <div className="items-list">
                             {myItems.map((item) => (
-                                <div key={item._id} className="trade-item">
+                                <div 
+                                    key={item._id} 
+                                    className="trade-item"
+                                    style={{ 
+                                        background: getRarityGradient(item.rarity),
+                                        display: 'flex',
+                                        flexDirection: 'row',
+                                        gap: '15px',
+                                        alignItems: 'flex-start',
+                                        padding: '12px'
+                                    }}
+                                >
                                     <img 
                                         src={`/images/${item.name}.png`}
                                         alt={item.name}
                                         className="item-icon"
+                                        style={{ 
+                                            width: '60px', 
+                                            height: '60px',
+                                            flexShrink: 0
+                                        }}
                                         onError={(e) => {
                                             const target = e.target as HTMLImageElement;
                                             target.src = '/images/Blindbox.png';
                                         }}
                                     />
-                                    <div className="item-details">
-                                        <span 
-                                            className="item-name"
-                                            style={{ color: getRarityColor(item.rarity) }}
-                                        >
-                                            {item.name}
-                                        </span>
-                                        <span className="item-type">{item.type}</span>
-                                        <span className="item-value">{item.value}g</span>
+                                    <div className="item-details" style={{ flex: 1, minWidth: 0 }}>
+                                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '5px' }}>
+                                            <span 
+                                                className="item-name"
+                                                style={{ 
+                                                    color: getRarityColor(item.rarity),
+                                                    fontWeight: 'bold',
+                                                    fontSize: '14px'
+                                                }}
+                                            >
+                                                {item.name}
+                                            </span>
+                                            <span className="item-value" style={{ 
+                                                fontWeight: 'bold',
+                                                fontSize: '14px',
+                                                color: '#f59e0b'
+                                            }}>
+                                                {item.value}g
+                                            </span>
+                                        </div>
+                                        <div style={{ display: 'flex', gap: '15px', fontSize: '12px', marginBottom: '5px' }}>
+                                            <span className="item-type" style={{ color: '#666' }}>{item.type}</span>
+                                            <span 
+                                                className="item-rarity"
+                                                style={{ 
+                                                    color: getRarityColor(item.rarity),
+                                                    fontWeight: 'bold'
+                                                }}
+                                            >
+                                                {item.rarity}
+                                            </span>
+                                        </div>
+                                        <div style={{ display: 'flex', gap: '20px', fontSize: '11px' }}>
+                                            {item.stats && item.stats.length > 0 && (
+                                                <div className="item-stats" style={{ color: '#444' }}>
+                                                    <strong>Stats:</strong> {item.stats.map(s => `${s.stat}: ${s.value}`).join(', ')}
+                                                </div>
+                                            )}
+                                            {item.effects && item.effects.length > 0 && (
+                                                <div className="item-effects" style={{ color: '#666', fontStyle: 'italic' }}>
+                                                    <strong>Effects:</strong> {item.effects.join(', ')}
+                                                </div>
+                                            )}
+                                        </div>
                                     </div>
                                 </div>
                             ))}
@@ -167,25 +232,76 @@ const ViewTrades: React.FC = () => {
                         <h4>You Get</h4>
                         <div className="items-list">
                             {theirItems.map((item) => (
-                                <div key={item._id} className="trade-item">
+                                <div 
+                                    key={item._id} 
+                                    className="trade-item"
+                                    style={{ 
+                                        background: getRarityGradient(item.rarity),
+                                        display: 'flex',
+                                        flexDirection: 'row',
+                                        gap: '15px',
+                                        alignItems: 'flex-start',
+                                        padding: '12px'
+                                    }}
+                                >
                                     <img 
                                         src={`/images/${item.name}.png`}
                                         alt={item.name}
                                         className="item-icon"
+                                        style={{ 
+                                            width: '60px', 
+                                            height: '60px',
+                                            flexShrink: 0
+                                        }}
                                         onError={(e) => {
                                             const target = e.target as HTMLImageElement;
                                             target.src = '/images/Blindbox.png';
                                         }}
                                     />
-                                    <div className="item-details">
-                                        <span 
-                                            className="item-name"
-                                            style={{ color: getRarityColor(item.rarity) }}
-                                        >
-                                            {item.name}
-                                        </span>
-                                        <span className="item-type">{item.type}</span>
-                                        <span className="item-value">{item.value}g</span>
+                                    <div className="item-details" style={{ flex: 1, minWidth: 0 }}>
+                                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '5px' }}>
+                                            <span 
+                                                className="item-name"
+                                                style={{ 
+                                                    color: getRarityColor(item.rarity),
+                                                    fontWeight: 'bold',
+                                                    fontSize: '14px'
+                                                }}
+                                            >
+                                                {item.name}
+                                            </span>
+                                            <span className="item-value" style={{ 
+                                                fontWeight: 'bold',
+                                                fontSize: '14px',
+                                                color: '#f59e0b'
+                                            }}>
+                                                {item.value}g
+                                            </span>
+                                        </div>
+                                        <div style={{ display: 'flex', gap: '15px', fontSize: '12px', marginBottom: '5px' }}>
+                                            <span className="item-type" style={{ color: '#666' }}>{item.type}</span>
+                                            <span 
+                                                className="item-rarity"
+                                                style={{ 
+                                                    color: getRarityColor(item.rarity),
+                                                    fontWeight: 'bold'
+                                                }}
+                                            >
+                                                {item.rarity}
+                                            </span>
+                                        </div>
+                                        <div style={{ display: 'flex', gap: '20px', fontSize: '11px' }}>
+                                            {item.stats && item.stats.length > 0 && (
+                                                <div className="item-stats" style={{ color: '#444' }}>
+                                                    <strong>Stats:</strong> {item.stats.map(s => `${s.stat}: ${s.value}`).join(', ')}
+                                                </div>
+                                            )}
+                                            {item.effects && item.effects.length > 0 && (
+                                                <div className="item-effects" style={{ color: '#666', fontStyle: 'italic' }}>
+                                                    <strong>Effects:</strong> {item.effects.join(', ')}
+                                                </div>
+                                            )}
+                                        </div>
                                     </div>
                                 </div>
                             ))}

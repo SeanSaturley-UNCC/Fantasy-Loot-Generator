@@ -40,8 +40,7 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
         const data = req.body
         const foundUser = await User.findOne({
             $or: [
-                { username: data.username },
-                { email: data.email }
+                { username: data.username }
             ]
         }).select(['+password'])
 
@@ -108,16 +107,11 @@ export const createUser = async (req: Request, res: Response): Promise<void> => 
         if (usernameExists) {
             throw new Error('Username already exists')
         }
-        const emailExists = await User.exists({ email: body.email })
-        if (emailExists) {
-            throw new Error('Email already exists')
-        }
 
         const hashedPassword = await hashPassword(body.password)
 
         const createdUser = await User.create({
             username: body.username,
-            email: body.email,
             password: hashedPassword
         })
         res.status(200).json(createdUser)
