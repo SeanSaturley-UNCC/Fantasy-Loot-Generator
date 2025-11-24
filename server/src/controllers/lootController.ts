@@ -56,8 +56,8 @@ export const getUserInventory = async (req: Request, res: Response): Promise<voi
         const { userId } = req.params
         const { sortBy, sortOrder } = req.query
         
-        // Default sort by createdAt ascending if no sort specified
-        let sortOptions: Record<string, number> = { createdAt: 1 }
+        // Default sort by createdAt descending if no sort specified
+        let sortOptions: Record<string, number> = { createdAt: -1 }
         
         if (sortBy && sortOrder) {
             const order = parseInt(sortOrder as string)
