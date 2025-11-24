@@ -53,15 +53,6 @@ export const ViewInventory = () => {
         }
     };
 
-    const handleLogout = useCallback(async () => {
-        try {
-            await logoutUser(user?._id);
-            navigate('/login');
-        } catch (error) {
-            // Handle logout error silently
-        }
-    }, [user, navigate]);
-
     const handleDiscardItem = async (itemId: any) => {
         if (window.confirm('Are you sure you want to discard this item?')) {
             try {
