@@ -186,7 +186,7 @@ export const CreateTrade = () => {
                         </option>
                         {users.map((u) => (
                             <option key={u._id} value={u._id}>
-                                {u.username} ({u.email})
+                                {u.username}
                             </option>
                         ))}
                     </select>

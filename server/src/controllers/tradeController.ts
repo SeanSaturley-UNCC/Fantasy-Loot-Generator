@@ -92,8 +92,8 @@ export const getOneTrade = async (req: Request, res: Response): Promise<void> =>
         const trade = await Trade.findById(tradeId)
             .populate('offeredItems')
             .populate('requestedItems')
-            .populate('offeredByUser', 'username email')
-            .populate('requestedFromUser', 'username email')
+            .populate('offeredByUser', 'username')
+            .populate('requestedFromUser', 'username')
 
         if (!trade) {
             res.status(404).json({ error: 'Trade not found' })
@@ -129,8 +129,8 @@ export const getAllTrades = async (req: Request, res: Response): Promise<void> =
         const trades = await Trade.find(query)
             .populate('offeredItems')
             .populate('requestedItems')
-            .populate('offeredByUser', 'username email')
-            .populate('requestedFromUser', 'username email')
+            .populate('offeredByUser', 'username')
+            .populate('requestedFromUser', 'username')
             .sort({ createdAt: -1 })
 
         res.status(200).json(trades)
